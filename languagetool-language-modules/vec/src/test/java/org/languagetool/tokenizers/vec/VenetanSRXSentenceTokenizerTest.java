@@ -1,5 +1,5 @@
 /* LanguageTool, a natural language style checker
- * Copyright (C) 2019 Daniel Naber (http://www.danielnaber.de)
+ * Copyright (C) 2014 Daniel Naber (http://www.danielnaber.de)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,25 +16,26 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
  * USA
  */
-package org.languagetool.rules.vec;
+package org.languagetool.tokenizers.vec;
 
 import org.junit.Test;
-import org.languagetool.LanguageSpecificTest;
+import org.languagetool.TestTools;
 import org.languagetool.language.Venetan;
+import org.languagetool.tokenizers.SRXSentenceTokenizer;
 
-import java.io.IOException;
-import java.util.Arrays;
+public class VenetanSRXSentenceTokenizerTest{
 
-public class ItalianTest extends LanguageSpecificTest {
+  private final SRXSentenceTokenizer stokenizer = new SRXSentenceTokenizer(new Venetan());
 
   @Test
-  public void testLanguage() throws IOException {
-    // NOTE: this text needs to be kept in sync with WelcomeController.php's getDefaultDemoTexts():
-    String s = "Inserite qui il vostro testo... oppure controlate direttamente questo ed avrete un assaggio di quali errori possono essere identificati con LanguageTool.";
-    Italian lang = new Italian();
-    testDemoText(lang, s,
-      Arrays.asList("GR_05_002", "MORFOLOGIK_RULE_IT_IT", "ST_03_001")
-    );
-    runTests(lang);
+  public void testTokenize() {
+    testSplit("Jèra na ‘àlta, int’ un sèrto paexe, na toxatèƚa de kanpaña, ƚa pi bèƚa toxatèƚa ke se poese mai véder",
+              "Só mama ƚa jèra mata de eƚa, e só nòna ankora de pi.");
+    testSplit("Dot. Karlo Vièna");  // abbreviation
   }
+
+  private void testSplit(String... sentences) {
+    TestTools.testSplit(sentences, stokenizer);
+  }
+
 }

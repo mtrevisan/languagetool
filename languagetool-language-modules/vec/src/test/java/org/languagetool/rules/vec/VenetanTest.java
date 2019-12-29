@@ -1,5 +1,5 @@
 /* LanguageTool, a natural language style checker
- * Copyright (C) 2014 Daniel Naber (http://www.danielnaber.de)
+ * Copyright (C) 2019 Daniel Naber (http://www.danielnaber.de)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,26 +16,25 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
  * USA
  */
-package org.languagetool.tokenizers.vec;
+package org.languagetool.rules.vec;
 
 import org.junit.Test;
-import org.languagetool.TestTools;
+import org.languagetool.LanguageSpecificTest;
 import org.languagetool.language.Venetan;
-import org.languagetool.tokenizers.SRXSentenceTokenizer;
 
-public class ItalianSRXSentenceTokenizerTest {
+import java.io.IOException;
+import java.util.Arrays;
 
-  private final SRXSentenceTokenizer stokenizer = new SRXSentenceTokenizer(new Italian());
+public class VenetanTest extends LanguageSpecificTest {
 
   @Test
-  public void testTokenize() {
-    testSplit("Il Castello Reale di Racconigi è situato a Racconigi, in provincia di Cuneo ma poco distante da Torino. ",
-              "Nel corso della sua quasi millenaria storia ha visto numerosi rimaneggiamenti e divenne di proprietà dei Savoia a partire dalla seconda metà del XIV secolo.");
-    testSplit("Dott. Bunsen Honeydew");  // abbreviation
+  public void testLanguage() throws IOException {
+    // NOTE: this text needs to be kept in sync with WelcomeController.php's getDefaultDemoTexts():
+    String s = "Inserite qui il vostro testo... oppure controlate direttamente questo ed avrete un assaggio di quali errori possono essere identificati con LanguageTool.";
+    Venetan lang = new Venetan();
+    testDemoText(lang, s,
+      Arrays.asList("GR_05_002", "MORFOLOGIK_RULE_VEC", "ST_03_001")
+    );
+    runTests(lang);
   }
-
-  private void testSplit(String... sentences) {
-    TestTools.testSplit(sentences, stokenizer);
-  }
-
 }

@@ -49,6 +49,7 @@ public class Venetan extends Language implements AutoCloseable {
   private Tagger tagger;
   private SentenceTokenizer sentenceTokenizer;
   private LanguageModel languageModel;
+  private WordTokenizer wordTokenizer;
   private Disambiguator disambiguator;
 
   @Override

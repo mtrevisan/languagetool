@@ -21,15 +21,15 @@ package org.languagetool;
 import org.languagetool.language.AbstractLanguageConcurrencyTest;
 import org.languagetool.language.Venetan;
 
-public class ItalianConcurrencyTest extends AbstractLanguageConcurrencyTest {
+public class VenetanConcurrencyTest extends AbstractLanguageConcurrencyTest {
   @Override
   protected Language createLanguage() {
-    return new Italian();
+    return new Venetan();
   }
 
   @Override
   protected String createSampleText() {
-    return "Da Wikipedia, l'enciclopedia libera.";
+    return "Da Wikipedia, la enŧiklopedía líbara.";
   }
 
 }

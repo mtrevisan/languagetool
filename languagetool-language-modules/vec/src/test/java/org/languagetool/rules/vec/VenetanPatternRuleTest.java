@@ -23,7 +23,7 @@ import org.languagetool.rules.patterns.PatternRuleTest;
 
 import java.io.IOException;
 
-public class ItalianPatternRuleTest extends PatternRuleTest {
+public class VenetanPatternRuleTest extends PatternRuleTest {
 
   @Test
   public void testRules() throws IOException {

@@ -26,28 +26,27 @@ import org.languagetool.tokenizers.WordTokenizer;
 
 import java.io.IOException;
 
-public class ItalianTaggerTest {
+public class VenetanTaggerTest{
 
-  private ItalianTagger tagger;
+  private VenetanTagger tagger;
   private WordTokenizer tokenizer;
 
   @Before
   public void setUp() {
-    tagger = new ItalianTagger();
+    tagger = new VenetanTagger();
     tokenizer = new WordTokenizer();
   }
 
   @Test
   public void testDictionary() throws IOException {
-    TestTools.testDictionary(tagger, new Italian());
+    TestTools.testDictionary(tagger, new Venetan());
   }
 
   @Test
   public void testTagger() throws IOException {
-    TestTools.myAssert("Non c'è linguaggio senza inganno.",
-        "Non/[non]ADV -- c/[C]NPR -- è/[essere]AUX:ind+pres+3+s|è/[essere]VER:ind+pres+3+s -- linguaggio/[linguaggio]NOUN-M:s -- senza/[senza]CON|senza/[senza]PRE -- inganno/[ingannare]VER:ind+pres+1+s|inganno/[inganno]NOUN-M:s", tokenizer, tagger);
-    TestTools.myAssert("Amo quelli che desiderano l'impossibile.",
-        "Amo/[amare]VER:ind+pres+1+s -- quelli/[quelli]PRO-DEMO-M-P|quelli/[quello]DET-DEMO:m+p -- che/[che]CON|che/[che]DET-WH:f+p|che/[che]DET-WH:f+s|che/[che]DET-WH:m+p|che/[che]DET-WH:m+s|che/[che]WH-CHE -- desiderano/[desiderare]VER:ind+pres+3+p -- l/[null]null -- impossibile/[impossibile]ADJ:pos+f+s|impossibile/[impossibile]ADJ:pos+m+s", tokenizer, tagger);
+    TestTools.myAssert("So’ drio ‘ndar da mé nòna.",
+        "So’/[èser]VER:ind+pres+1+s -- drio/[ADV] -- ‘ndar/[andar]VER:inf -- da/[PREP]null -- mé/[PRON]CON -- nòna/[nòna]NOUN-F:null", tokenizer, tagger);
+    TestTools.myAssert("tuk-tuk", "tuk-tuk/[INTER]null", tokenizer, tagger);
     TestTools.myAssert("blablabla", "blablabla/[null]null", tokenizer, tagger);
   }
 
