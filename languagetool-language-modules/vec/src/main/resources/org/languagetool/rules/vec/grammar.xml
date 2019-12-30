@@ -27,44 +27,41 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  Categorie delle regole
     gruppi delle regole                         ID              stato
  ============================================== =============== ===============
- Grammatica - Aggettivi                         GR_01
-   uso corretto                                 GR_01_01        add more
+ Gramàdega - Artíkoli                          GR_02
+   uxo korèto                                 GR_02_001       ok
 
- Grammatica - Articoli                          GR_02
-   uso corretto                                 GR_02_001       ok
-
- Grammatica - Concordanza                       GR_03
+ Gramàdega - Concordanza                       GR_03
    tra genere e numero                          GR_03_001       to do
    tra soggetto e verbo                         GR_03_002       to do
 
- Grammatica - Elisioni e troncamenti            GR_04
+ Gramàdega - Elisioni e troncamenti            GR_04
    apocopi vocaliche                            GR_04_001       add more
    elisioni                                     GR_04_002       add more
 
- Grammatica - Frase                             GR_05
+ Gramàdega - Frase                             GR_05
    altri elementi                               GR_05_001       to do
    struttura                                    GR_05_002       add more
 
- Grammatica - Maiuscole                         GR_06
-   uso corretto                                 GR_06_001       not needed?
+ Gramàdega - Maiuscole                         GR_06
+   uxo korèto                                 GR_06_001       not needed?
 
- Grammatica - Preposizioni                      GR_07
-   uso corretto                                 GR_07_001       add more
+ Gramàdega - Preposizioni                      GR_07
+   uxo korèto                                 GR_07_001       add more
 
- Grammatica - Pronomi                           GR_08
-   uso corretto                                 GR_08_001       to do
+ Gramàdega - Pronomi                           GR_08
+   uxo korèto                                 GR_08_001       to do
 
- Grammatica - Punteggiatura                     GR_09
+ Gramàdega - Punteggiatura                     GR_09
    asterischi di omissione (***)                GR_09_001       ok
    puntini di sospensione (...)                 GR_09_002       ok
    ripetizioni                                  GR_09_003       ok
    sigle                                        GR_09_004       ok
 
- Grammatica - Verbi                             GR_10
-   concordanza tempi delle coordinate           GR_10_001       ok
-   concordanza tempi delle subordinate          GR_10_002       to do
-   uso del congiuntivo                          GR_10_003       add more
-   uso corretto                                 GR_10_004       add more
+ Gramàdega - Verbi                             GR_10
+   konkòrdanza tempi delle coordinate           GR_10_001       ok
+   konkòrdanza tempi delle subordinate          GR_10_002       to do
+   uxo del congiuntivo                          GR_10_003       add more
+   uxo korèto                                 GR_10_004       add more
 
  Stile - Espressioni                            ST_01
    arcaiche                                     ST_01_001       to do
@@ -72,7 +69,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
    pleonasmi                                    ST_01_003       add more
    regionali                                    ST_01_004       add more
    straniere                                    ST_01_005       add more
-   uso errato                                   ST_01_006       to do
+   uxo errato                                   ST_01_006       to do
 
  Stile - Frase                                  ST_02
    frasi lunghe                                 ST_02_001       ok
@@ -97,14 +94,13 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  ======== ===================================================================================
  PB001    Removed prepositions and two letter words in repetition check
  PB002    Added some preposition usage checks (moved a gratis rule)
- 2957133  name/article concordance (un vs uno)
- PB003    Added rule for checking the use of adverbs instead of adjectives
+ 2957133  name/article konkòrdance (un vs uno)
  PB004    Added rule for attimino and momentino in stile-parlato
  PB005    Fixed rule for dà to exclude "se da" pattern voted as useless
- PB006    Fixed rule for false positives in past tense concordance GR_10_001
- PB007    Added check for person in tense concordance GR_10_* overrides PB006
+ PB006    Fixed rule for false positives in past tense konkòrdance GR_10_001
+ PB007    Added check for person in tense konkòrdance GR_10_* overrides PB006
  PB008    Added rules to check the use of "congiuntivo"
- PB009    Created uso corretto under verbs and added adire vie legali
+ PB009    Created uxo korèto under verbs and added adire vie legali
  PB010    Reworked repetition rule ST_03_002
  PB011    Reworked rule GR_04_002 exteneded to all words ending with à|è|é|ì|ò|ù
  PB012    Added exception for article of the word "dei"
@@ -119,187 +115,159 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  PB014    We don't need the skip in article rules since we are unifying adj and noun
  ======== ==================================================================================
 -->
+<!--suppress CheckTagEmptyBody -->
+
+<!DOCTYPE rules [
+		<!ENTITY apostrophe "['ʼ]">
+
+		<!ENTITY weekdays "Luni|Marti|Mèrkore|Mèrkol|Đoba|Xoba|Đòba|Xòba|Đioba|Xioba|Điòba|Xiòba|Đobia|Xobia|Đòbia|Xòbia|Vénder|Vendre|Véner|Vénere|Vénar|Vénare|Sabo|Sàbado|Doménega|Doméniga|Domíniga">
+		<!ENTITY abbrevWeekdays "Lun|Mar|Mèr|Đob|Xob|Đòb|Xòb|Đio|Xio|Điò|Xiò|Vén|Ven|Sab|Sàb|Dom">
+		<!ENTITY months "Đenaro|Xenaro|Đanèr|Xanèr|Đenèr|Xenèr|Đeñèr|Xeñèr|Febraro|Fevraro|Fevrèr|Feverèr|Marŧo|Marso|April|Aprile|Apriƚe|Avril|Avrile|Avriƚe|Averil|Averile|Averiƚe|Veril|Verile|Veriƚe|Mađo|Maxo|Majo|Maɉo|Đuño|Xuño|Xunio|Junio|Ɉunio|Lujo|Luɉo|Ƚujo|Ƚuɉo|Lulio|Luƚio|Ƚuƚio|Agosto|Agusto|Avosto|Aosto|Setenbre|Seténbare|Setenbro|Otore|Otobre|Otóbare|Otobro|Noenbre|Novenbre|Novénbare|Novenbro|Dexenbre|Deŧènbre|Desènbre|Deŧenbre|Desenbre|Dexénbare|Deŧénbare|Desénbare|Deŧenbro|Desenbro">
+		<!ENTITY abbrevMonths "Đen|Xen|Đan|Xan|Đeñ|Xeñ|Feb|Fev|Mar|Apr|Avr|Ave|Ver|Mađ|Max|Maj|Maɉ|Đuñ|Xuñ|Xun|Jun|Ɉun|Luj|Luɉ|Ƚuj|Ƚuɉ|Lul|Luƚ|Ƚuƚ|Ago|Agu|Avo|Aos|Set|Oto|Otó|Noe|Nov|Dex|Deŧ|Des">
+
+		<!ENTITY hyphen "(?:[-‑])">
+
+		<!ENTITY ambiguous_date '
+			<token regexp="yes">0?[1-9]|1[0-2]</token>
+			<token>/</token>
+			<token regexp="yes">0?[1-9]|1[0-2]</token>
+			<token>/</token>
+			<token regexp="yes">\d\d\d\d</token>
+		'>
+		<!-- "7 Otobre 2014" -->
+		<!ENTITY date_dmy '
+			<token regexp="yes">\d\d?</token>
+			<token regexp="yes">&months;|&abbrevMonths;</token>
+			<token regexp="yes">\d\d\d\d</token>
+		'>
+		<!ENTITY date_dmy_skip '
+			<token regexp="yes">\d\d?</token>
+			<token regexp="yes">&months;|&abbrevMonths;</token>
+			<token regexp="yes" skip="-1">\d\d\d\d</token>
+		'>
+		<!-- "31/10/2014" -->
+		<!ENTITY date_dmy_numbers '
+			<token regexp="yes">0?[1-9]|[12][0-9]|3[01]</token>
+			<token>/</token>
+			<token regexp="yes">0?[1-9]|1[0-2]</token>
+			<token>/</token>
+			<token regexp="yes">\d\d\d\d</token>
+		'>
+		<!ENTITY date_dmy_numbers_skip '
+			<token regexp="yes">0?[1-9]|[12][0-9]|3[01]</token>
+			<token>/</token>
+			<token regexp="yes">0?[1-9]|1[0-2]</token>
+			<token>/</token>
+			<token regexp="yes" skip="-1">\d\d\d\d</token>
+		'>
+	]>
 
 <rules lang="vec" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd">
 
-    <!-- GRAMMATICA AGGETTIVI - GR_01 -->
-    <category id="CAT1" name="Grammatica - Aggettivi">
-        <rulegroup name="uso corretto" id="GR_01_001">
-            <!-- PB003 + -->
-            <!-- meglio -->
+    <!-- GRAMÀDEGA ARTÍKOLI - GR_02 -->
+    <category id="CAT2" name="Gramàdega - Artíkoli">
+        <rulegroup name="uxo korèto" id="GR_02_001">
+<!-- http://wiki.languagetool.org/development-overview -->
+				<!-- [eaʼ]l/[lƚ]o ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
+				<rule>
+					<pattern>
+						<!-- PB014 marker><token skip="1" regexp="yes">[lƚ][ae]|lʼ|i</token></marker -->
+						<marker><token regexp="yes">[lƚ][ae]|lʼ|i</token></marker>
+						<token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">
+							[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*
+							<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/>
+						</token>
+					</pattern>
+					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>la/ƚa</suggestion>.</message>
+					<example correction="el/al/lo/ƚo">Kuanto xe ke ʼl kosta <marker>la</marker> vin?</example>
+					<example>Kuanto xe ke ʼl kosta <marker>el</marker> vin?</example>
+				</rule>
+            <!-- [lƚ]a/lʼ ([ea]l|[lƚ]o|ʼl|[lƚ]a|lʼ|i|[lƚ]e) -->
             <rule>
                 <pattern>
-                    <token>meglio</token>
-                    <token postag="(NOUN-M.s)|(NOUN-F.s)" postag_regexp="yes"/>
+                    <!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oe]|i</token></marker -->
+                    <marker><token regexp="yes">[eaʼ]l|[lƚ][oe]|i</token></marker>
+							<token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes">
+								<exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/>
+							</token>
                 </pattern>
-                <message>Non utilizzare un avverbio in luogo di un aggettivo: <suggestion><match no="2"/> migliore</suggestion>.</message>
-                <example correction="occasione migliore">Bisogna cogliere la <marker>meglio occasione</marker>.</example>
-                <example>Bisogna cogliere l'<marker>occasione migliore</marker>.</example>
+                <message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>la/ƚa</suggestion>.</message>
+                <example correction="la/ƚa">Gò visto <marker>el</marker> gata ke la faxéa le fuxa.</example>
+                <example>Gò visto <marker>la</marker> gata ke la faxéa le fuxa.</example>
             </rule>
-            <rule>
-                <pattern>
-                    <token>meglio</token>
-                    <token postag="(NOUN-M.p)|(NOUN-F.p)" postag_regexp="yes"/>
-                </pattern>
-                <message>Non utilizzare un avverbio in luogo di un aggettivo: <suggestion><match no="2"/> migliori</suggestion>.</message>
-                <example correction="occasioni migliori">Bisogna cogliere le <marker>meglio occasioni</marker>.</example>
-            </rule>
-            <!-- peggio -->
-            <rule>
-                <pattern>
-                    <token>peggio</token>
-                    <token postag="(NOUN-M.s)|(NOUN-F.s)" postag_regexp="yes"/>
-                </pattern>
-                <message>Non utilizzare un avverbio in luogo di un aggettivo: <suggestion><match no="2"/> peggiore</suggestion>.</message>
-                <example correction="figura peggiore">Evitiamo di fare una <marker>peggio figura</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token>peggio</token>
-                    <token postag="(NOUN-M.p)|(NOUN-F.p)" postag_regexp="yes"/>
-                </pattern>
-                <message>Non utilizzare un avverbio in luogo di un aggettivo: <suggestion><match no="2"/> peggiori</suggestion>.</message>
-                <example correction="figure peggiori">Evitiamo di fare delle <marker>peggio figure</marker>.</example>
-            </rule>
-            <!-- PB003 - -->
-        </rulegroup>
-    </category>
+				<!-- i ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
+				<rule>
+					<pattern>
+						<!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oae]|lʼ</token></marker -->
+						<marker><token regexp="yes">[eaʼ]l|[lƚ][oae]|lʼ</token></marker>
+						<token postag="(NOUN-M.p)|(ADJ.*\+m\+p)" postag_regexp="yes" regexp="yes">
+							[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*
+							<exception postag="(NOUN-M.s)|(ADJ.*\+m\+s)|(NOUN-F.p)|(ADJ.*\+f\+p)|(ADV)" postag_regexp="yes"/>
+							<!-- PB0012 + -->
+<!--							<exception>dei</exception>-->
+							<!-- PB0012 - -->
+						</token>
+					</pattern>
+					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>la/ƚa</suggestion>.</message>
+					<example correction="la/ƚa">Gò visto <marker>el</marker> gata ke la faxéa le fuxa.</example>
+					<example>Gò visto <marker>la</marker> gata ke la faxéa le fuxa.</example>
+				</rule>
+				<!-- [lƚ]e ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
+				<rule>
+					<pattern>
+						<!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oa]|lʼ|i</token></marker -->
+						<marker><token regexp="yes">[eaʼ]l|[lƚ][oa]|lʼ|i</token></marker>
+						<token postag="(NOUN-F.p)|(ADJ.*\+f\+p)" postag_regexp="yes">
+							<exception postag="(NOUN-[MF].s)|(ADJ.*\+f\+s)|(NOUN-M.p)|(ADJ.*\+m\+p)(ADV)" postag_regexp="yes"/>
+							<!-- 3610289 + -->
+<!--							<exception regexp="yes">(?-i)Siñore</exception>-->
+							<!-- 3610289 - -->
+						</token>
+					</pattern>
+					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>le/ƚe</suggestion>.</message>
+					<example correction="la/ƚa">Gò visto <marker>i</marker> gate ke la faxéa le fuxa.</example>
+					<example>Gò visto <marker>le</marker> gate ke la faxéa le fuxa.</example>
+				</rule>
 
-    <!-- GRAMMATICA ARTICOLI - GR_02 -->
-    <category id="CAT2" name="Grammatica - Articoli">
-        <rulegroup name="uso corretto" id="GR_02_001">
-            <!-- la -->
+				<!-- un|an|on (un|an|on|na|nʼ) -->
+				<rule>
+					<pattern>
+					<!-- PB014 marker><token skip="1" regexp="yes">na|nʼ</token></marker -->
+					<marker><token regexp="yes">na|nʼ</token></marker>
+					<token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">
+						[bcdfghlmnpqrstv][aeiou].*|[bcdfghlmnqrtv][bcdfghlmnpqrtv].*
+						<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/>
+					</token>
+					</pattern>
+					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>un</suggestion>.</message>
+					<example correction="na/nʼ">Mi pàsitu <marker>un</marker> pera?</example>
+				</rule>
+            <!-- na/nʼ (un|an|on|na|nʼ) -->
             <rule>
                 <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">il|lo|i|gli|le</token></marker -->
-                    <marker><token regexp="yes">il|lo|i|gli|le</token></marker>
-                    <token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes"><exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/></token>
+                    <!-- PB014 marker><token skip="1" regexp="yes">un|an|on</token></marker -->
+                    <marker><token regexp="yes">un|an|on</token></marker>
+                    <token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes">
+								<exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/>
+							</token>
                 </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>la</suggestion>.</message>
-                <example correction="la">Vidi <marker>il</marker> mucca pascolare nel campo.</example>
+                <message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>na</suggestion>.</message>
+                <example correction="na/nʼ">Gò visto <marker>un</marker> gata ke la faxéa le fuxa.</example>
+                <example>Gò visto <marker>na</marker> gata ke la faxéa le fuxa.</example>
             </rule>
-            <!-- le -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">il|lo|i|gli|la</token></marker -->
-                    <marker><token regexp="yes">il|lo|i|gli|la</token></marker>
-                    <token postag="(NOUN-F.p)|(ADJ.*\+f\+p)" postag_regexp="yes"><exception postag="(NOUN-[MF].s)|(ADJ.*\+f\+s)|(NOUN-M.p)|(ADJ.*\+m\+p)(ADV)" postag_regexp="yes"/>
-<!-- 3610289 + -->
-                    	<exception regexp="yes">(?-i)Signore</exception>
-<!-- 3610289 - -->
-                    </token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>le</suggestion>.</message>
-                <example correction="le">Vidi <marker>il</marker> mucche pascolare nel campo.</example>
-                <example>il male è la specializzazione</example>
-                <example>il pioniere dei videogiochi</example>
-            </rule>
-            <!-- una -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">un|uno</token></marker -->
-                    <marker><token regexp="yes">un|uno</token></marker>
-                    <token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes"><exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/></token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>una</suggestion>.</message>
-                <example correction="una">Vidi <marker>un</marker> mucca pascolare nel campo.</example>
-                <example>Vidi <marker>una</marker> mucche pascolare nel campo.</example>
-            </rule>
-            <!-- il -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">lo|la|i|gli|le</token></marker -->
-                    <marker><token regexp="yes">lo|la|i|gli|le</token></marker>
-                    <token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/></token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>il</suggestion>.</message>
-                <example correction="il">Quanto costa <marker>lo</marker> vino?</example>
-                <example>Io le ritrovo quando osservo</example>
-            </rule>
-            <!-- i -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">lo|la|il|gli|le</token></marker -->
-                    <marker><token regexp="yes">lo|la|il|gli|le</token></marker>
-                    <token postag="(NOUN-M.p)|(ADJ.*\+m\+p)" postag_regexp="yes" regexp="yes">[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*<exception postag="(NOUN-M.s)|(ADJ.*\+m\+s)|(NOUN-F.p)|(ADJ.*\+f\+p)|(ADV)" postag_regexp="yes"/>
-<!-- PB0012 + -->
-                    	<exception>dei</exception>
-<!-- PB0012 - -->
-                    </token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>i</suggestion>.</message>
-                <example correction="i">Hai fatto <marker>le</marker> compiti?</example>
-            </rule>
-            <!-- un -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">uno|una</token></marker -->
-                    <marker><token regexp="yes">uno|una</token></marker>
-                    <token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">[bcdfghlmnpqrstv][aeiou].*|[bcdfghlmnqrtv][bcdfghlmnpqrtv].*<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/></token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>un</suggestion>.</message>
-                <example correction="un">Mi insegni <marker>uno</marker> trucco?</example>
-            </rule>
-            <!-- lo -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">i|la|il|gli|le</token></marker -->
-                    <marker><token regexp="yes">i|la|il|gli|le</token></marker>
-                    <token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">[zx].*|s[bcdfghlmnpqrstv].*|p[ns].*|gn.*|[iy][aeiou].*<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/></token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>lo</suggestion>.</message>
-                <example correction="lo">Ho forato <marker>il</marker> pneumatico.</example>
-                <example>Hai forato <marker>lo</marker> pneumatico.</example>
-            </rule>
-            <!-- gli -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">i|la|il|lo|le</token></marker -->
-                    <marker><token regexp="yes">i|la|il|lo|le</token></marker>
-                    <token postag="(NOUN-M.p)|(ADJ.*\+m\+p)" postag_regexp="yes" regexp="yes">[zx].*|s[bcdfghlmnpqrstv].*|p[ns].*|gn.*|[iy][aeiou].*<exception postag="(NOUN-M.s)|(ADJ.*\+m\+s)|(NOUN-F.p)|(ADJ.*\+f\+p)|(ADV)" postag_regexp="yes"/></token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>gli</suggestion>.</message>
-                <example correction="gli">Come raccontano <marker>i</marker> storici...</example>
-            </rule>
-            <!-- uno -->
-            <rule>
-                <pattern>
-                    <!-- PB014 marker><token skip="1" regexp="yes">un|una</token></marker -->
-                    <marker><token regexp="yes">un|una</token></marker>
-                    <!-- 2957133 + -->
-                    <!--
-                                        <token postag="NOUN-M.s" postag_regexp="yes" regexp="yes">[zx].*|s[bcdfghlmnpqrstv].*|p[ns].*|[gn].*|[iy][aeiou].*<exception postag="(NOUN-M.p)|(NOUN-F.s)" postag_regexp="yes"/></token>
-                    -->
-                    <token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">[zx].*|s[bcdfghlmnpqrstv].*|p[ns].*|gn.*|[iy][aeiou].*<exception postag="(NOUN-M.p)|(ADJ.*\+m\+p)|(NOUN-F.s)|(ADJ.*\+f\+s)|(ADV)" postag_regexp="yes"/></token>
-                    <!-- 2957133 - -->
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>uno</suggestion>.</message>
-                <example correction="uno">Devi andare da <marker>un</marker> psicologo.</example>
-            </rule>
-<!-- PB012 + -->
-            <!-- gli dei-->
-            <rule>
-                <pattern>
-                    <marker><token regexp="yes">i|la|il|lo|le</token></marker>
-                    <token>dei</token>
-                </pattern>
-                <message>L'articolo non concorda, usare: <suggestion>gli</suggestion>.</message>
-                <example correction="gli">Adoravano <marker>i</marker> dei del suono.</example>
-            </rule>
-<!-- PB012 - -->
 		</rulegroup>
     </category>
 
-    <!-- GRAMMATICA CONCORDANZA - GR_03 -->
-    <!--  category name="Grammatica - Concordanza"> -->
+    <!-- GRAMÀDEGA CONCORDANZA - GR_03 -->
+    <!--  category name="Gramàdega - Concordanza"> -->
     <!-- TO DO	<rulegroup name="tra genere e numero" id="GR_03_001">
           </rulegroup>
           <rulegroup name="tra soggetto e verbo" id="GR_03_002">
           </rulegroup>
       </category> -->
 
-    <!-- GRAMMATICA ELSIONI E TRONCAMENTI - GR_04 -->
-    <category id="CAT3" name="Grammatica - Elisioni e troncamenti">
+    <!-- GRAMÀDEGA ELSIONI E TRONCAMENTI - GR_04 -->
+    <category id="CAT3" name="Gramàdega - Elisioni e troncamenti">
         <rulegroup name="apocopi vocaliche" id="GR_04_001">
             <!-- Qual è -->
             <rule>
@@ -308,7 +276,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>'</token>
                     <token>è</token>
                 </pattern>
-                <message>L'apostrofo non è richiesto in quanto non si tratta di elisione: <suggestion>qual è</suggestion>.</message>
+                <message>L'apostrofo no ʼl è richiesto in quanto no ʼl si tratta di elisione: <suggestion>qual è</suggestion>.</message>
                 <example correction="qual è">Da professionista <marker>qual'è</marker>.</example>
             </rule>
             <!-- Un altro-->
@@ -351,7 +319,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>e</token>
                     <token>'</token>
                 </pattern>
-                <message>Si suggerisce di non usare l'apostrofo per scrivere il verbo essere: <suggestion>è</suggestion>.</message>
+                <message>Si suggerisce di no ʼl doparar l'apostrofo per scrivere il verbo essere: <suggestion>è</suggestion>.</message>
                 <example correction="è">L'uva <marker>e'</marker> sul tavolo.</example>
             </rule>
             <!-- perche' -->
@@ -372,7 +340,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>E</token>
                     <token>'</token>
                 </pattern>
-                <message>Si suggerisce di non usare l'apostrofo per il verbo essere: <suggestion>È</suggestion>.</message>
+                <message>Si suggerisce di no ʼl doparar l'apostrofo per il verbo essere: <suggestion>È</suggestion>.</message>
                 <example correction="È"><marker>E'</marker> un peccato!</example>
             </rule>
             <!-- da' -->
@@ -387,12 +355,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rulegroup>
     </category>
 
-    <!-- GRAMMATICA FRASE - GR_05 -->
-    <category id="CAT4" name="Grammatica - Frase">
+    <!-- GRAMÀDEGA FRASE - GR_05 -->
+    <category id="CAT4" name="Gramàdega - Frase">
         <!-- TO DO	<rulegroup name="altri elementi" id="GR_05_001">
             </rulegroup> -->
         <rulegroup name="struttura" id="GR_05_002">
-            <!-- non iniziare la frase con una congiunzione -->
+            <!-- no ʼl iniziare la frase con una congiunzione -->
             <rule>
                 <pattern>
                     <token postag="SENT_START"/>
@@ -400,28 +368,28 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                         <token postag="CON"/>
                     </marker>
                 </pattern>
-                <message>Si consiglia di non iniziare una frase con una congiunzione.</message>
-                <example correction=""><marker>E</marker> non si capisce il perché di tanta paura.</example>
+                <message>Si consiglia di no ʼl iniziare una frase con una congiunzione.</message>
+                <example correction=""><marker>E</marker> no ʼl si capisce il perché di tanta paura.</example>
                 <example><marker/>Non si capisce il perché di tanta paura.</example>
             </rule>
         </rulegroup>
     </category>
 
-    <!-- GRAMMATICA MAIUSCOLE - GR_06
-      <category id="CATx" name="Grammatica - Maiuscole"> -->
-    <!-- TO DO	<rulegroup name="uso corretto" id="GR_06_001">
+    <!-- GRAMÀDEGA MAIUSCOLE - GR_06
+      <category id="CATx" name="Gramàdega - Maiuscole"> -->
+    <!-- TO DO	<rulegroup name="uxo korèto" id="GR_06_001">
           </rulegroup>
       </category> -->
 
-    <!-- GRAMMATICA PREPOSIZIONI - GR_07 -->
-    <category id="CAT5" name="Grammatica - Preposizioni">
+    <!-- GRAMÀDEGA PREPOSIZIONI - GR_07 -->
+    <category id="CAT5" name="Gramàdega - Preposizioni">
         <rulegroup id="ARTICOLATA_SOSTANTIVO" name="Concordanza preposizione articolata - sostantivo">
             <rule>
                 <pattern>
                     <token postag='ARTPRE-M:p'/>
                     <token postag='NOUN-M:s'><exception postag="NOUN-M:p"/></token>
                 </pattern>
-                <message>La preposizione articolata non concorda con il sostantivo che la segue</message>
+                <message>La preposizione articolata no ʼl konkòrda con il sostantivo che la segue</message>
                 <example type="correct">Il libro <marker>degli amici</marker>.</example>
                 <example type="incorrect">Il libro <marker>degli amico</marker></example>
             </rule>
@@ -430,7 +398,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag='ARTPRE-M:s'/>
                     <token postag='NOUN-M:p'><exception postag="NOUN-M:s"/></token>
                 </pattern>
-                <message>La preposizione articolata non concorda con il sostantivo che la segue</message>
+                <message>La preposizione articolata no ʼl konkòrda con il sostantivo che la segue</message>
                 <example type="correct">Il libro <marker>dell'amico amici</marker>.</example>
                 <example type="incorrect">Il libro <marker>dello amici</marker></example>
             </rule>
@@ -439,7 +407,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag='ARTPRE-F:p'/>
                     <token postag='NOUN-F:s'><exception postag="NOUN-F:p"/></token>
                 </pattern>
-                <message>La preposizione articolata non concorda con il sostantivo che la segue</message>
+                <message>La preposizione articolata no ʼl konkòrda con il sostantivo che la segue</message>
                 <example type="correct">Il libro <marker>dell'amica</marker>.</example>
                 <example type="incorrect">Il libro <marker>delle amica</marker></example>
             </rule>
@@ -448,7 +416,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag='ARTPRE-F:s'/>
                     <token postag='NOUN-F:p'><exception postag="NOUN-F:s"/></token>
                 </pattern>
-                <message>La preposizione articolata non concorda con il sostantivo che la segue</message>
+                <message>La preposizione articolata no ʼl konkòrda con il sostantivo che la segue</message>
                 <example type="correct">Il libro <marker>dell'amica</marker>.</example>
                 <example type="incorrect">Il libro <marker>della amiche</marker></example>
             </rule>
@@ -470,7 +438,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <example correction=''>leader <marker>sul prodotti</marker></example>
             <example>leader sui prodotti</example>
         </rule>
-        <rulegroup name="uso corretto" id="GR_07_001">
+        <rulegroup name="uxo korèto" id="GR_07_001">
             <!-- da -->
             <rule>
                 <pattern>
@@ -558,7 +526,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     </marker>
                     <token postag="NPR"/>
                 </pattern>
-                <message>La forma corretta è <suggestion>di nome</suggestion> e non a nome.</message>
+                <message>La forma corretta è <suggestion>di nome</suggestion> e no ʼl a nome.</message>
                 <example correction="di nome">Una ragazza <marker>a nome</marker> Francesca.</example>
             </rule>
             <!-- biglietto da visita -->
@@ -578,14 +546,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rulegroup>
     </category>
 
-    <!-- GRAMMATICA PRONOMI - GR_08
-      <category id="CATx" name="Grammatica - Pronomi"> -->
-    <!-- TO DO	<rulegroup name="uso corretto" id="GR_08_001">
+    <!-- GRAMÀDEGA PRONOMI - GR_08
+      <category id="CATx" name="Gramàdega - Pronomi"> -->
+    <!-- TO DO	<rulegroup name="uxo korèto" id="GR_08_001">
           </rulegroup>
       </category> -->
 
-    <!-- GRAMMATICA PUNTEGGIATURA - GR_09 -->
-    <category id="CAT6" name="Grammatica - Punteggiatura">
+    <!-- GRAMÀDEGA PUNTEGGIATURA - GR_09 -->
+    <category id="CAT6" name="Gramàdega - Punteggiatura">
         <rulegroup name="asterischi di omissione (***)" id="GR_09_001">
             <rule>
                 <pattern>
@@ -596,7 +564,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token><exception regexp="no">*</exception></token>
                 </pattern>
                 <message>L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.</message>
-                <example correction="***">Preferisco non pensare a quel <marker>**</marker>.</example>
+                <example correction="***">Preferisco no ʼl pensare a quel <marker>**</marker>.</example>
             </rule>
             <rule>
                 <pattern>
@@ -604,7 +572,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag="SENT_END" regexp="no" spacebefore="no">*</token>
                 </pattern>
                 <message>L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.</message>
-                <example correction="***">Preferisco non pensare a quel <marker>**</marker></example>
+                <example correction="***">Preferisco no ʼl pensare a quel <marker>**</marker></example>
             </rule>
             <rule>
                 <pattern>
@@ -617,7 +585,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token><exception regexp="no">*</exception></token>
                 </pattern>
                 <message>L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.</message>
-                <example correction="***">Preferisco non pensare a quel <marker>****</marker>.</example>
+                <example correction="***">Preferisco no ʼl pensare a quel <marker>****</marker>.</example>
             </rule>
             <rule>
                 <pattern>
@@ -627,7 +595,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag="SENT_END" regexp="no" spacebefore="no">*</token>
                 </pattern>
                 <message>L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.</message>
-                <example correction="***">Preferisco non pensare a quel <marker>****</marker></example>
+                <example correction="***">Preferisco no ʼl pensare a quel <marker>****</marker></example>
             </rule>
             <rule>
                 <pattern>
@@ -638,7 +606,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token postag="SENT_END" regexp="no" spacebefore="no">*</token>
                 </pattern>
                 <message>L’asterisco si usa per un’omissione nel numero di tre consecutivi: <suggestion>***</suggestion>.</message>
-                <example correction="***">Preferisco non pensare a quel <marker>*****</marker></example>
+                <example correction="***">Preferisco no ʼl pensare a quel <marker>*****</marker></example>
             </rule>
         </rulegroup>
         <rulegroup name="puntini di sospensione (...)" id="GR_09_002">
@@ -810,8 +778,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rulegroup>
     </category>
 
-    <!-- GRAMMATICA VERBI - GR_10 -->
-    <category id="CAT7" name="Grammatica - Verbi">
+    <!-- GRAMÀDEGA VERBI - GR_10 -->
+    <category id="CAT7" name="Gramàdega - Verbi">
 
         <rule id="DOPPIO_VERBO_AUSILIARE_TERZA_PERSONA" name="Doppio verbo ausiliare terza persona">
             <pattern>
@@ -820,10 +788,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             </pattern>
             <message>La frase contiene un verbo ausiliare ripetuto</message>
             <short>Verbo ausiliare ripetuto</short>
-            <example correction=''>non <marker>sono vengono</marker> preparate con le tecnologie e le infrastrutture adatte</example>
+            <example correction=''>no ʼl <marker>sono vengono</marker> preparate con le tecnologie e le infrastrutture adatte</example>
         </rule>
 
-	<rulegroup name="concordanza tempi delle coordinate" id="GR_10_001">
+	<rulegroup name="konkòrdanza tempi delle coordinate" id="GR_10_001">
 <!-- PB007 + -->
             <!-- IND PRESENTE -->
 	    <rule>
@@ -967,14 +935,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <example>Gianna <marker>pensa che sia</marker> meglio rimanere a casa.</example>
                 </rule>
             </rulegroup> -->
-        <rulegroup name="uso del congiuntivo" id="GR_10_003">
+        <rulegroup name="uxo del congiuntivo" id="GR_10_003">
 <!-- PB008 + -->
             <!-- use of congiuntivo
             Il congiuntivo si usa:
 1) con alcune congiunzioni subordinanti, quali affinché, benché, sebbene, quantunque, a meno che, nel caso che, qualora, prima che, senza che;
 2) con aggettivi o pronomi indefiniti (qualunque, chiunque, qualsiasi, ovunque, dovunque);
 3) con espressioni impersonali, come è necessario che, è probabile che, è bene che;
-4) in formule ormai fissate nell'uso (vada come vada; costi quel che costi). -->
+4) in formule ormai fissate nell'uxo (vada come vada; costi quel che costi). -->
             <!--  congiunzioni subordinanti -->
             <rule>
                 <pattern>
@@ -1003,8 +971,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     </marker>
                 </pattern>
                 <message>La congiunzione 'a meno che' richiede il congiuntivo.</message>
-                <example correction="">Non possiamo vederci a meno che tu non <marker>puoi</marker> venire.</example>
-                <example>Non possiamo vederci a meno che tu non <marker>possa</marker> venire.</example>
+                <example correction="">Non possiamo vederci a meno che tu no ʼl <marker>puoi</marker> venire.</example>
+                <example>Non possiamo vederci a meno che tu no ʼl <marker>possa</marker> venire.</example>
             </rule>
             <rule>
                 <pattern>
@@ -1072,7 +1040,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 <!-- PB008 - -->
         </rulegroup>
 <!-- PB009 + -->
-        <rulegroup name="uso corretto" id="GR_10_004">
+        <rulegroup name="uxo korèto" id="GR_10_004">
         	<!-- adire le vie legali -->
         	<rule>
         		<pattern>
@@ -1155,18 +1123,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         <!-- PB004- -->
 
         <rulegroup name="pleonasmi" id="ST_01_003">
-<!-- PB0013 + -->
+				<!-- PB0013 begin -->
             <!-- ma però grazie Valerio Summo per il suggerimento-->
 			<rule>
 				<pattern>
 					<token>ma</token>
 					<token>però</token>
 				</pattern>
-				<message>Ma e però non possono essere usati insieme.</message>
+				<message>Ma e però no ʼl possono essere usati insieme.</message>
 				<example correction="">Sono arrivato <marker>ma però</marker> me ne vado subito.</example>
 				<example>Sono arrivato però me ne vado subito.</example>
 			</rule>
-<!-- PB0013 -->
+				<!-- PB0013 end -->
             <!-- a me mi -->
             <rule>
                 <pattern case_sensitive="no">
@@ -1214,7 +1182,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token inflected="yes" skip="4" regexp="yes">abolire|eliminare|abrogare|togliere|levare|depennare|cancellare|cassare</token>
                     <token regexp="yes">interamente|completamente|totalmente|integralmente</token>
                 </pattern>
-                <message>Si tratta di una ripetizione, meglio usare <suggestion>\1</suggestion>.</message>
+                <message>Si tratta di una ripetizione, meglio doparar <suggestion>\1</suggestion>.</message>
                 <example correction="abolito">La commissione ha <marker>abolito interamente</marker> il provvedimento.</example>
             </rule>
             <!-- io personalmente -->
@@ -1223,7 +1191,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>io</token>
                     <token>personalmente</token>
                 </pattern>
-                <message>Si consiglia di evitare questa ridondanza a meno che non si intenda, ad esempio, tenere distinte le proprie opinioni personali da quelle che competono alla propria funzione, al proprio &quot;ruolo istituzionale&quot;.</message>
+                <message>Si consiglia di evitare questa ridondanza a meno che no ʼl si intenda, ad esempio, tenere distinte le proprie opinioni personali da quelle che competono alla propria funzione, al proprio &quot;ruolo istituzionale&quot;.</message>
                 <example correction="">Verrò <marker>io personalmente</marker> a trovarla.</example>
                 <example>Verrò <marker>personalmente</marker> a trovarla.</example>
             </rule>
@@ -1349,7 +1317,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             </rule>
 
         </rulegroup>
-        <!-- TO DO	<rulegroup name="uso errato" id="ST_01_006">
+        <!-- TO DO	<rulegroup name="uxo errato" id="ST_01_006">
             </rulegroup> -->
     </category>
 
@@ -1373,7 +1341,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     </marker>
                 </pattern>
                 <message>Si suggerisce di frammentare questa frase perché risulta troppo lunga.</message>
-                <example correction=""><marker>La casa aveva tante cose da vedere e da toccare con mano attenta a non romperle e occhio pronto ad ammirarle in tutto lo splendore infuso loro dalla cura maniacale per la perfezione che la padrona esibiva in qualunque sua attività ogni giorno che passava.</marker></example>
+                <example correction=""><marker>La casa aveva tante cose da vedere e da toccare con mano attenta a no ʼl romperle e occhio pronto ad ammirarle in tutto lo splendore infuxo loro dalla cura maniacale per la perfezione che la padrona esibiva in qualunque sua attività ogni giorno che passava.</marker></example>
                 <example><marker>La casa era piena di cose.</marker></example>
             </rule>
         </rulegroup>
@@ -1388,9 +1356,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>ad</token>
                     <token regexp="yes">[eiou].*<exception regexp="yes">esempio|es</exception></token>
                 </pattern>
-                <message>L'uso della d eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>a <match no="2"/></suggestion>.</message>
+                <message>L'uxo della d eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>a <match no="2"/></suggestion>.</message>
                 <example correction="a interpretare">Provo <marker>ad interpretare</marker> il tuo pensiero.</example>
-                <example>Io, <marker>ad esempio</marker>, non ci sono cascato.</example>
+                <example>Io, <marker>ad esempio</marker>, no ʼl ci sono cascato.</example>
             </rule>
             <!-- togli ed -->
             <rule>
@@ -1398,7 +1366,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>ed</token>
                     <token regexp="yes">[aiou].*</token>
                 </pattern>
-                <message>L'uso della 'd' eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>e <match no="2"/></suggestion>.</message>
+                <message>L'uxo della 'd' eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>e <match no="2"/></suggestion>.</message>
                 <example correction="e insisto">Ti dico <marker>ed insisto</marker> che è vero.</example>
             </rule>
             <!-- togli od -->
@@ -1407,7 +1375,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>od</token>
                     <token regexp="yes">[aieu].*</token>
                 </pattern>
-                <message>L'uso della 'd' eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>o <match no="2"/></suggestion>.</message>
+                <message>L'uxo della 'd' eufonica dovrebbe essere limitato ai casi di incontro della stessa vocale: <suggestion>o <match no="2"/></suggestion>.</message>
                 <example correction="o un">Si consiglia un farmaco blando <marker>od un</marker> omeopatico.</example>
             </rule>
 
@@ -1417,9 +1385,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>a</token>
                     <token regexp="yes">[a].*|esempio|es</token>
                 </pattern>
-                <message>In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ad <match no="2"/></suggestion>.</message>
+                <message>In questo caso l'uxo della 'd' eufonica è ammesso: <suggestion>ad <match no="2"/></suggestion>.</message>
                 <example correction="ad arrivare">Provo <marker>a arrivare</marker> prima di te.</example>
-                <example>Io, <marker>ad esempio</marker>, non ci sono cascato.</example>
+                <example>Io, <marker>ad esempio</marker>, no ʼl ci sono cascato.</example>
             </rule>
             <!-- metti ed -->
             <rule>
@@ -1427,7 +1395,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>e</token>
                     <token regexp="yes">[e].*</token>
                 </pattern>
-                <message>In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>ed <match no="2"/></suggestion>.</message>
+                <message>In questo caso l'uxo della 'd' eufonica è ammesso: <suggestion>ed <match no="2"/></suggestion>.</message>
                 <example correction="ed effettua">Si concentra <marker>e effettua</marker> una bella manovra.</example>
             </rule>
             <!-- metti od -->
@@ -1436,7 +1404,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token>o</token>
                     <token regexp="yes">[o].*</token>
                 </pattern>
-                <message>In questo caso l'uso della 'd' eufonica è ammesso: <suggestion>od <match no="2"/></suggestion>.</message>
+                <message>In questo caso l'uxo della 'd' eufonica è ammesso: <suggestion>od <match no="2"/></suggestion>.</message>
                 <example correction="od ogni">Puoi vederlo ogni mattina <marker>o ogni</marker> sera.</example>
                 <example>Puoi vederlo ogni mattina <marker>od ogni</marker> sera.</example>
             </rule>
@@ -1444,7 +1412,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         <rulegroup name="ripetizioni" id="ST_03_002">
             <rule>
                 <pattern>
-<!-- PB001 + -->
+<!-- PB001 begin -->
 <!--
                                         <token skip="-1" regexp="yes">[qwertyuiopasdfghjklzxcvbnm].*<exception postag="ART.*|CON" postag_regexp="yes"/></token>
 -->
@@ -1453,7 +1421,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                     <token skip="-1" regexp="yes">[qwertyuiopasdfghjklzxcvbnm].*<exception postag="PRE|ARTPRE.*|ART.*|CON|PON" postag_regexp="yes"></exception><exception regexp="yes">l|dell|all|sull|dall|nell</exception></token>
 -->
 					<token skip="-1" postag_regexp="yes" postag="ADJ.*|ADV.*|NOUN.*|VER.*"/>
-<!-- PB001 - -->
+<!-- PB001 end -->
                     <marker>
                     	<token>
                     	    <match no="0"/>
@@ -1468,7 +1436,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <message>Si consiglia di rivedere la frase al fine di eliminare la ripetizione della parola: <match no="1"/>.</message>
                 <example correction="">Il bambino aveva capito bene l'altro <marker>bambino</marker> di fronte a se.</example>
                 <example>Il bambino aveva capito bene l'altro fanciullo di fronte a se.</example>
-                <example>Ma non è questo che contesto, il male è la specializzazione.</example>
+                <example>Ma no ʼl è questo che contesto, il male è la specializzazione.</example>
             </rule>
         </rulegroup>
     </category>
@@ -1701,7 +1669,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 	<!-- ERRORI COMUNI - ER_02 -->
 	<category id="CAT13" name="Ulteriori errori comuni - ortografia">
         <!--
-             Casi in cui il correttore ortografico non interviene
+             Casi in cui il korètore ortografico no ʼl interviene
              perché entrambi i lemmi esistono in veneto.
         -->
         <rulegroup name="scambio di 'ala' ed 'alla'" id="ER_02_001">
