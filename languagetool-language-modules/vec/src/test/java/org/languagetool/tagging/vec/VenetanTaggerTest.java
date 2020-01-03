@@ -23,18 +23,19 @@ import org.junit.Test;
 import org.languagetool.TestTools;
 import org.languagetool.language.Venetan;
 import org.languagetool.tokenizers.WordTokenizer;
+import org.languagetool.tokenizers.vec.VenetanWordTokenizer;
 
 import java.io.IOException;
 
 public class VenetanTaggerTest{
 
   private VenetanTagger tagger;
-  private WordTokenizer tokenizer;
+  private VenetanWordTokenizer tokenizer;
 
   @Before
   public void setUp() {
     tagger = new VenetanTagger();
-    tokenizer = new WordTokenizer();
+    tokenizer = new VenetanWordTokenizer();
   }
 
   @Test
@@ -44,9 +45,11 @@ public class VenetanTaggerTest{
 
   @Test
   public void testTagger() throws IOException {
-    TestTools.myAssert("So’ drio ‘ndar da mé nòna.",
-        "So’/[èser]VER:ind+pres+1+s -- drio/[ADV] -- ‘ndar/[andar]VER:inf -- da/[PREP]null -- mé/[PRON]CON -- nòna/[nòna]NOUN-F:null", tokenizer, tagger);
-    TestTools.myAssert("tuk-tuk", "tuk-tuk/[INTER]null", tokenizer, tagger);
+    TestTools.myAssert("So' drio 'ndar da mé nòna.",
+      "So'/[sora]AD\r|So'/[sora]PR\r|So'/[èser]VB\r -- drio/[drio]AD\r -- 'ndar/[ʼndar]VB\r -- da/[da]PR\r -- mé/[mé]JJP\r -- nòna/[nòna]NNs+f\r|nòna/[nòna]NOs+f\r", tokenizer, tagger);
+    TestTools.myAssert("Soʼ drio ʼndar da mé nòna.",
+        "Soʼ/[sora]AD\r|Soʼ/[sora]PR\r|Soʼ/[èser]VB\r -- drio/[drio]AD\r -- ʼndar/[ʼndar]VB\r -- da/[da]PR\r -- mé/[mé]JJP\r -- nòna/[nòna]NNs+f\r|nòna/[nòna]NOs+f\r", tokenizer, tagger);
+    TestTools.myAssert("tuk-tuk", "tuk-tuk/[tuk-tuk]IN\r", tokenizer, tagger);
     TestTools.myAssert("blablabla", "blablabla/[null]null", tokenizer, tagger);
   }
 

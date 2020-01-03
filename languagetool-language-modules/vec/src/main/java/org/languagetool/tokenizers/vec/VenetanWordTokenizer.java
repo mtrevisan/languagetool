@@ -21,6 +21,8 @@ package org.languagetool.tokenizers.vec;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.languagetool.tokenizers.WordTokenizer;
 
@@ -29,13 +31,12 @@ import org.languagetool.tokenizers.WordTokenizer;
  */
 public class VenetanWordTokenizer extends WordTokenizer {
 
-  @Override
-  public String getTokenizingCharacters() {
-    return super.getTokenizingCharacters() + "–";  // n-dash
-  }
+  private static final Pattern APOSTROPHE = Pattern.compile("(?i)"
+    + "([dglƚnsv]|(a|[aiʼ]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([nʼ]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)['’](?=[" + Pattern.quote(getTokenizingCharacters()) + "])"
+    + "|"
+    + "(?<=\\s)['’][^" + Pattern.quote(getTokenizingCharacters()) + "]+"
+  );
 
-  private static final String[] EXCEPTIONS = {"fo'c'sle"};
-  private static final String[] EXCEPTION_REPLACEMENT = {"fo\u2626c\u2626sle"};
 
   /**
    * Tokenizes text.
@@ -50,30 +51,55 @@ public class VenetanWordTokenizer extends WordTokenizer {
    * @param text String of words to tokenize.
    */
   @Override
-  public List<String> tokenize(String text) {
-    List<String> l = new ArrayList<>();
-    boolean hasException = false;
-    for (int idx = 0; idx < EXCEPTIONS.length; idx++) {
-      if(text.contains(EXCEPTIONS[idx])) {
-      	hasException = true;
-        text = text.replace(EXCEPTIONS[idx], EXCEPTION_REPLACEMENT[idx]);
-      }
+  public List<String> tokenize(final String text) {
+    List<String> list = new ArrayList<>();
+    final StringTokenizer st = new StringTokenizer(text, getTokenizingCharacters(), true);
+    while(st.hasMoreElements()){
+      final String token = st.nextToken();
+      list.add(token);
     }
-    StringTokenizer st = new StringTokenizer(text, getTokenizingCharacters(), true);
-    while (st.hasMoreElements()) {
-      String token = st.nextToken();
-      for (int idx = 0; hasException && idx < EXCEPTIONS.length; idx++) {
-        if (token.equals(EXCEPTION_REPLACEMENT[idx])) {
-      	  token = EXCEPTIONS[idx];
-      	}
-      }
-      if (token.length() > 1 && token.endsWith("-")) {
-        l.add(token.substring(0, token.length() - 1));
-        l.add("-");
-      } else {
-        l.add(token);
-      }
-    }
-    return joinEMailsAndUrls(l);
+    list = joinApostrophes(list);
+    list = joinEMails(list);
+    list = joinUrls(list);
+    return list;
   }
+
+  /**
+   * @since 3.5
+   */
+  protected List<String> joinApostrophes(final List<String> list){
+    final StringBuilder sb = new StringBuilder();
+    for(final String item : list){
+      sb.append(item);
+    }
+    final String text = sb.toString();
+    if(text.contains("'") || text.contains("’")){
+      final List<String> l = new ArrayList<>();
+
+      final Matcher matcher = APOSTROPHE.matcher(text);
+      int currentPosition = 0;
+      int idx = 0;
+      while(matcher.find()){
+        final int start = matcher.start();
+        final int end = matcher.end();
+        while(currentPosition < end){
+          if(currentPosition < start){
+            l.add(list.get(idx));
+          }
+          else if(currentPosition == start){
+            l.add(matcher.group());
+          }
+          currentPosition += list.get(idx).length();
+          idx ++;
+        }
+      }
+      if(currentPosition < text.length()){
+        l.addAll(list.subList(idx, list.size()));
+      }
+
+      return l;
+    }
+    return list;
+  }
+
 }

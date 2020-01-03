@@ -1,6 +1,6 @@
 /* LanguageTool, a natural language style checker
  * Copyright (C) 2005 Daniel Naber (http://www.danielnaber.de)
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -34,7 +34,7 @@ import org.languagetool.tools.StringTools;
  * The tokenizer is a quite simple character-based one, though it knows
  * about urls and will put them in one token, if fully specified including
  * a protocol (like {@code http://foobar.org}).
- * 
+ *
  * @author Daniel Naber
  */
 public class WordTokenizer implements Tokenizer {
@@ -99,7 +99,7 @@ public class WordTokenizer implements Tokenizer {
    * tokenizer to tokenize words.
    * @since 2.5
    */
-  public String getTokenizingCharacters() {
+  public static String getTokenizingCharacters() {
     return TOKENIZING_CHARACTERS;
   }
 
