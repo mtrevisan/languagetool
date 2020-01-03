@@ -37,19 +37,10 @@ public class VenetanWordTokenizer extends WordTokenizer {
     + "(?<=\\s)['’][^" + Pattern.quote(getTokenizingCharacters()) + "]+"
   );
 
+  private static final String UNICODE_APOSTROPHE = "'";
+  private static final String UNICODE_RIGHT_SINGLE_QUOTATION_MARK = "\u2019";
 
-  /**
-   * Tokenizes text.
-   * The Venetan tokenizer differs from the standard one
-   * in two respects:
-   * <ol>
-   * <li> it does not treat the hyphen as part of the
-   * word if the hyphen is at the end of the word;</li>
-   * <li> it includes n-dash as a tokenizing character,
-   * as it is used without a whitespace in Venetan.
-   * </ol>
-   * @param text String of words to tokenize.
-   */
+
   @Override
   public List<String> tokenize(final String text) {
     List<String> list = new ArrayList<>();
@@ -64,16 +55,13 @@ public class VenetanWordTokenizer extends WordTokenizer {
     return list;
   }
 
-  /**
-   * @since 3.5
-   */
   protected List<String> joinApostrophes(final List<String> list){
     final StringBuilder sb = new StringBuilder();
     for(final String item : list){
       sb.append(item);
     }
     final String text = sb.toString();
-    if(text.contains("'") || text.contains("’")){
+    if(text.contains(UNICODE_APOSTROPHE) || text.contains(UNICODE_RIGHT_SINGLE_QUOTATION_MARK)){
       final List<String> l = new ArrayList<>();
 
       final Matcher matcher = APOSTROPHE.matcher(text);
@@ -87,9 +75,13 @@ public class VenetanWordTokenizer extends WordTokenizer {
             l.add(list.get(idx));
           }
           else if(currentPosition == start){
-            l.add(matcher.group());
+            //substitute Unicode Apostrophe with Unicode Right Single Quotation Mark
+            final String group = matcher.group()
+              .replaceAll(UNICODE_APOSTROPHE, UNICODE_RIGHT_SINGLE_QUOTATION_MARK);
+            l.add(group);
           }
-          currentPosition += list.get(idx).length();
+          currentPosition += list.get(idx)
+            .length();
           idx ++;
         }
       }

@@ -35,7 +35,7 @@ public class VenetanTagger extends BaseTagger {
   }
 
   public VenetanTagger() {
-    super("/vec/venetan.dict", Locale.ITALIAN);
+    super("/vec/venetan.dict", Locale.ROOT);
   }
 
 }
