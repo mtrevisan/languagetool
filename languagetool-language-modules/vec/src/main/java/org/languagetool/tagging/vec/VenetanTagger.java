@@ -22,11 +22,6 @@ import java.util.Locale;
 
 import org.languagetool.tagging.BaseTagger;
 
-/**
- * Venetan tagger. Uses morph-it! lexicon compiled by Marco Baroni and Eros Zanchetta.
- *
- * @author Marcin Milkowski
- */
 public class VenetanTagger extends BaseTagger {
 
   @Override

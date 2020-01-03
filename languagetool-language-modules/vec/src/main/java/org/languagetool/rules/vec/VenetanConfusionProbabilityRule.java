@@ -24,6 +24,7 @@ import org.languagetool.rules.ngrams.ConfusionProbabilityRule;
 
 import java.util.ResourceBundle;
 
+
 /**
  * @since 3.1
  */

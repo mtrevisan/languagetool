@@ -19,13 +19,14 @@
 
 package org.languagetool.rules.vec;
 
+import org.languagetool.Language;
+import org.languagetool.UserConfig;
+import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.languagetool.Language;
-import org.languagetool.UserConfig;
-import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 
 public final class MorfologikVenetanSpellerRule extends MorfologikSpellerRule {
 

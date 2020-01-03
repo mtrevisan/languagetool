@@ -76,7 +76,7 @@ public class VenetanWordTokenizer extends WordTokenizer {
             l.add(list.get(idx));
           }
           else if(currentPosition == start){
-            //substitute Unicode Apostrophe with Unicode Right Single Quotation Mark
+            //substitute Unicode Apostrophe with Unicode Modifier Letter Apostrophe
             final String group = matcher.group()
               .replaceAll(UNICODE_APOSTROPHE, UNICODE_MODIFIER_LETTER_APOSTROPHE);
             l.add(group);

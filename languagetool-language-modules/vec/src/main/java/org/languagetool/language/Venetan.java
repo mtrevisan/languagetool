@@ -43,7 +43,9 @@ import org.languagetool.tokenizers.SentenceTokenizer;
 import org.languagetool.tagging.disambiguation.Disambiguator;
 import org.languagetool.tagging.disambiguation.rules.vec.VenetanRuleDisambiguator;
 
-//http://wiki.languagetool.org/adding-a-new-language
+/**
+ * @author Mauro Trevisan
+ */
 public class Venetan extends Language implements AutoCloseable {
 
   private Tagger tagger;
