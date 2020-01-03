@@ -31,14 +31,15 @@ import org.languagetool.tokenizers.WordTokenizer;
  */
 public class VenetanWordTokenizer extends WordTokenizer {
 
-  private static final Pattern APOSTROPHE = Pattern.compile("(?i)"
-    + "([dglƚnsv]|(a|[aiʼ]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([nʼ]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)['’](?=[" + Pattern.quote(getTokenizingCharacters()) + "])"
-    + "|"
-    + "(?<=\\s)['’][^" + Pattern.quote(getTokenizingCharacters()) + "]+"
-  );
-
   private static final String UNICODE_APOSTROPHE = "'";
-  private static final String UNICODE_RIGHT_SINGLE_QUOTATION_MARK = "\u2019";
+  private static final String UNICODE_MODIFIER_LETTER_APOSTROPHE = "\u02BC";
+  private static final String UNICODE_APOSTROPHES_PATTERN = "[" + UNICODE_APOSTROPHE + UNICODE_MODIFIER_LETTER_APOSTROPHE + "]";
+
+  private static final Pattern APOSTROPHE = Pattern.compile("(?i)"
+    + "([dglƚnsv]|(a|[ai\u2019]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([n\u2019]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)" + UNICODE_APOSTROPHES_PATTERN + "(?=[" + Pattern.quote(getTokenizingCharacters()) + "])"
+    + "|"
+    + "(?<=\\s)" + UNICODE_APOSTROPHES_PATTERN + "[^" + Pattern.quote(getTokenizingCharacters()) + "]+"
+  );
 
 
   @Override
@@ -61,7 +62,7 @@ public class VenetanWordTokenizer extends WordTokenizer {
       sb.append(item);
     }
     final String text = sb.toString();
-    if(text.contains(UNICODE_APOSTROPHE) || text.contains(UNICODE_RIGHT_SINGLE_QUOTATION_MARK)){
+    if(text.contains(UNICODE_APOSTROPHE) || text.contains(UNICODE_MODIFIER_LETTER_APOSTROPHE)){
       final List<String> l = new ArrayList<>();
 
       final Matcher matcher = APOSTROPHE.matcher(text);
@@ -77,7 +78,7 @@ public class VenetanWordTokenizer extends WordTokenizer {
           else if(currentPosition == start){
             //substitute Unicode Apostrophe with Unicode Right Single Quotation Mark
             final String group = matcher.group()
-              .replaceAll(UNICODE_APOSTROPHE, UNICODE_RIGHT_SINGLE_QUOTATION_MARK);
+              .replaceAll(UNICODE_APOSTROPHE, UNICODE_MODIFIER_LETTER_APOSTROPHE);
             l.add(group);
           }
           currentPosition += list.get(idx)

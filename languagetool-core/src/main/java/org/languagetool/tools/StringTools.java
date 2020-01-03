@@ -1,6 +1,6 @@
-/* LanguageTool, a natural language style checker 
+/* LanguageTool, a natural language style checker
  * Copyright (C) 2005 Daniel Naber (http://www.danielnaber.de)
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -35,7 +35,7 @@ import com.google.common.xml.XmlEscapers;
 
 /**
  * Tools for working with strings.
- * 
+ *
  * @author Daniel Naber
  */
 public final class StringTools {
@@ -66,6 +66,7 @@ public final class StringTools {
 
   private static final Pattern XML_COMMENT_PATTERN = Pattern.compile("<!--.*?-->", Pattern.DOTALL);
   private static final Pattern XML_PATTERN = Pattern.compile("(?<!<)<[^<>]+>", Pattern.DOTALL);
+  private static final char UNICODE_MODIFIER_LETTER_APOSTROPHE = '\u02BC';
   public static final Set<String> UPPERCASE_GREEK_LETTERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("Α","Β","Γ","Δ","Ε","Ζ","Η","Θ","Ι","Κ","Λ","Μ","Ν","Ξ","Ο","Π","Ρ","Σ","Τ","Υ","Φ","Χ","Ψ","Ω")));
   public static final Set<String> LOWERCASE_GREEK_LETTERS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("α","β","γ","δ","ε","ζ","η","θ","ι","κ","λ","μ","ν","ξ","ο","π","ρ","σ","τ","υ","φ","χ","ψ","ω")));
 
@@ -164,7 +165,10 @@ public final class StringTools {
     if (!isEmpty(str) && Character.isUpperCase(str.charAt(0))) {
       for (int i = 1; i < str.length(); i++) {
         char c = str.charAt(i);
-        if (Character.isLetter(c) && !Character.isLowerCase(c)) {
+        //Unicode modifier letter apostrophe is considered as an uppercase letter,
+        //but the Modifier Letter Apostrophe can be regarded as caseless,
+        //so it has to be excluded from this condition
+        if (Character.isLetter(c) && c != UNICODE_MODIFIER_LETTER_APOSTROPHE && !Character.isLowerCase(c)) {
           return false;
         }
       }
@@ -186,7 +190,7 @@ public final class StringTools {
   /**
    * Return <code>str</code> modified so that its first character is now an
    * uppercase character. If <code>str</code> starts with non-alphabetic
-   * characters, such as quotes or parentheses, the first character is 
+   * characters, such as quotes or parentheses, the first character is
    * determined as the first alphabetic character.
    */
   @Nullable
@@ -195,7 +199,7 @@ public final class StringTools {
   }
 
   /**
-   * Like {@link #uppercaseFirstChar(String)}, but handles a special case for Dutch (IJ in 
+   * Like {@link #uppercaseFirstChar(String)}, but handles a special case for Dutch (IJ in
    * e.g. "ijsselmeer" -&gt; "IJsselmeer").
    * @param language the language, will be ignored if it's {@code null}
    * @since 2.7
@@ -213,7 +217,7 @@ public final class StringTools {
   /**
    * Return <code>str</code> modified so that its first character is now an
    * lowercase character. If <code>str</code> starts with non-alphabetic
-   * characters, such as quotes or parentheses, the first character is 
+   * characters, such as quotes or parentheses, the first character is
    * determined as the first alphabetic character.
    */
   @Nullable
@@ -225,7 +229,7 @@ public final class StringTools {
    * Return <code>str</code> modified so that its first character is now an
    * lowercase or uppercase character, depending on <code>toUpperCase</code>.
    * If <code>str</code> starts with non-alphabetic
-   * characters, such as quotes or parentheses, the first character is 
+   * characters, such as quotes or parentheses, the first character is
    * determined as the first alphabetic character.
    */
   @Nullable
@@ -241,8 +245,8 @@ public final class StringTools {
     while (!Character.isLetterOrDigit(str.charAt(pos)) && len > pos) {
       pos++;
     }
-    char firstChar = str.charAt(pos);    
-    return str.substring(0, pos) 
+    char firstChar = str.charAt(pos);
+    return str.substring(0, pos)
         + (toUpperCase ? Character.toUpperCase(firstChar) : Character.toLowerCase(firstChar))
         + str.substring(pos + 1);
   }
@@ -265,8 +269,8 @@ public final class StringTools {
     try (InputStreamReader isr = new InputStreamReader(is, charsetName)) {
       return readerToString(isr);
     }
-  } 
-  
+  }
+
   /**
    * Calls {@link #escapeHTML(String)}.
    */
@@ -323,7 +327,7 @@ public final class StringTools {
    * token elements that cannot possibly contain any spaces, with the exception
    * for a single space in a word (for example, if the language supports numbers
    * formatted with spaces as single tokens, as Catalan in LanguageTool).
-   * 
+   *
    * @param s String to be filtered.
    * @return Filtered s.
    */
@@ -357,7 +361,7 @@ public final class StringTools {
 
   /**
    * Adds spaces before words that are not punctuation.
-   * 
+   *
    * @param word Word to add the preceding space.
    * @param language
    *          Language of the word (to check typography conventions). Currently
@@ -418,7 +422,7 @@ public final class StringTools {
     }
     return false;
   }
-  
+
   /**
    * Checks if a string is the non-breaking whitespace (<code>\u00A0</code>).
    * @since 2.1
@@ -437,7 +441,7 @@ public final class StringTools {
 
   /**
    * Helper method to replace calls to {@code "".equals()}.
-   * 
+   *
    * @param str String to check
    * @return true if string is empty or {@code null}
    */
@@ -451,7 +455,7 @@ public final class StringTools {
    * @return Filtered string without XML tags.
    */
   public static String filterXML(String str) {
-    String s = str;       
+    String s = str;
     if (s.contains("<")) { // don't run slow regex unless we have to
       s = XML_COMMENT_PATTERN.matcher(s).replaceAll(" ");
       s = XML_PATTERN.matcher(s).replaceAll("");
