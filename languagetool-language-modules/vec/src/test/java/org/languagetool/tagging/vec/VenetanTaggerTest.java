@@ -22,7 +22,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.TestTools;
 import org.languagetool.language.Venetan;
-import org.languagetool.tokenizers.WordTokenizer;
 import org.languagetool.tokenizers.vec.VenetanWordTokenizer;
 
 import java.io.IOException;

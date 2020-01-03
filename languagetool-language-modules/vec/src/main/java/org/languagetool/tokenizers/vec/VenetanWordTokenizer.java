@@ -35,12 +35,17 @@ public class VenetanWordTokenizer extends WordTokenizer {
   private static final String UNICODE_MODIFIER_LETTER_APOSTROPHE = "\u02BC";
   private static final String UNICODE_APOSTROPHES_PATTERN = "[" + UNICODE_APOSTROPHE + UNICODE_MODIFIER_LETTER_APOSTROPHE + "]";
 
-  private static final Pattern APOSTROPHE = Pattern.compile("(?i)"
-    + "([dglƚnsv]|(a|[ai\u2019]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([n\u2019]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)" + UNICODE_APOSTROPHES_PATTERN + "(?=[" + Pattern.quote(getTokenizingCharacters()) + "])"
-    + "|"
-    + "(?<=\\s)" + UNICODE_APOSTROPHES_PATTERN + "[^" + Pattern.quote(getTokenizingCharacters()) + "]+"
-  );
+  private final Pattern patternApostrophe;
 
+
+  public VenetanWordTokenizer(){
+    final String tokenizingChars = Pattern.quote(getTokenizingCharacters());
+    patternApostrophe = Pattern.compile("(?i)"
+      + "([dglƚnsv]|(a|[ai\u2019]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([n\u2019]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)" + UNICODE_APOSTROPHES_PATTERN + "(?=[" + tokenizingChars + "])"
+      + "|"
+      + "(?<=\\s)" + UNICODE_APOSTROPHES_PATTERN + "[^" + tokenizingChars + "]+"
+    );
+  }
 
   @Override
   public List<String> tokenize(final String text) {
@@ -65,7 +70,7 @@ public class VenetanWordTokenizer extends WordTokenizer {
     if(text.contains(UNICODE_APOSTROPHE) || text.contains(UNICODE_MODIFIER_LETTER_APOSTROPHE)){
       final List<String> l = new ArrayList<>();
 
-      final Matcher matcher = APOSTROPHE.matcher(text);
+      final Matcher matcher = patternApostrophe.matcher(text);
       int currentPosition = 0;
       int idx = 0;
       while(matcher.find()){

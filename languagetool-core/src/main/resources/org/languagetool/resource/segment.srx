@@ -4179,7 +4179,7 @@
 <rule break="no">
 <beforebreak>\b(бульв|г|д|доп|др|е|зам|Зам|и|им|инд|исп|Исп)\.\s</beforebreak>
 <afterbreak></afterbreak>
-</rule>    
+</rule>
 <rule break="no">
 <beforebreak>\b(англ|в|вв|га|гг|гл|гос|грн|дм|долл|е|ед)\.\s</beforebreak>
 <afterbreak>\p{Ll}</afterbreak>
@@ -4687,7 +4687,7 @@
 <afterbreak>(und|oder|bis)\s</afterbreak>
 </rule>
 <!-- einige deutsche Monate, vor denen eine Zahl erscheinen kann,
-         ohne dass eine Satzgrenze erkannt wird 
+         ohne dass eine Satzgrenze erkannt wird
          (z.B. "am 13. Dezember" -> keine Satzgrenze) -->
 <rule break="no">
 <beforebreak>\d+\.\s</beforebreak>
@@ -5140,7 +5140,7 @@
 <beforebreak>[(«"„“”][а-яіїєґ]+\.[\s\u00A0\u202F]</beforebreak>
 <afterbreak></afterbreak>
 </rule>
-<!-- 
+<!--
 <rule break="no">
 <beforebreak>\b(англ|амер|італ|ісп|нім|фр|франц|лат)\.[\s\u00A0\u202F]+</beforebreak>
 <afterbreak>[\s\u00A0\u202F]*[A-Za-z]</afterbreak>
@@ -5765,6 +5765,100 @@
 <afterbreak>\p{Lu}\p{Ll}</afterbreak>
 </rule>
 </languagerule>
+<languagerule languagerulename="Venetan">
+<!-- Venetan abbreviations A - Đ -->
+<rule break="no">
+<beforebreak>\b(a\.k|Amn|Ark|Bcc|Cc|bank|Dot|Dr|d\.n\.k|Dit|D\.p\.A|D\.r\.[lƚ]|D\.r\.lh|([đx]|dh)|đđ|dhdh|xx|([ĐX]|Dh)eòm|([ĐX]|Dh)en)\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Venetan abbreviations E - Ƚ -->
+<rule break="no">
+<beforebreak>\b(Egr|e\.p\.k|fat|Id|In[đx]|int|Kav|K\.A\.P|k\.k\.p|k\.m|Ko|k\.p|K\.P|K\.p\.r|kor|k\.s|K\.V|([lƚ]|lh)eg|([lƚ]|lh)ét)\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b(Egr\.ia?|evk|F\.li|KAP|k/o|K\.so|([LȽ]|Lh)\.mo)\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Venetan abbreviations M - P -->
+<rule break="no">
+<beforebreak>\b(Mo|Mons|N\.B|n|núm|o([jɉ]|jh)|On|p|pàx|post|pp|p\.k|p\.k\.k|p\.ex|p\.f|p\.r|P\.S|p\.v|P\.T|Prof)\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b(N|ns|P\.([ŧs]|th)a|P\.([lƚ]|lh)e)\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Venetan abbreviations R - S -->
+<rule break="no">
+<beforebreak>\b(R|rak|Ra([đx]|dh)|Rev|re([ŧs]|th)|Ref|R\.P|R\.S\.V\.P|S\.A|S\. ak|S\.B\.F|seg|ss|Señ|Seññ|Spet|S\.P\.M)\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b(S E &amp; O|Señ\.na|Señ\.ra)\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Venetan abbreviations T - V -->
+<rule break="no">
+<beforebreak>\b(te([lƚ]|lh)|u\.s|V|V\.P|v\.r|v\.s|Vog)\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b(vs|V\.([lƚ]|lh)e|V?EK|VIP)\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Venetan dictionary abbreviations -->
+<rule break="no">
+<beforebreak>\b(aj|akux|ar[gt]|ant|aux|av|dat|def|dir|([đx]|dh)ont|([đx]|dh)ontat|ex|f|fut|in[df]|indef|indir|inp[ea]r[fs]|int[ea]r|kom|kond|koniug|konpl|koord|m|s?o([jɉ]|jh)|p[ea]r[fs]|part|pl|prep|pron|refl|re([lƚ]|lh)|sing|sub|v|xer|([ŧs]|th)it|kòd|([lƚ]|lh)ig|ed|feg|se([ŧs]|th)|be([lƚ]|lh)|bix|cip|cox|fel|([lƚ]|lh)ad|([lƚ]|lh)iv|pa[dgv]|po([lƚ]|lh)|seg|ta([lƚ]|lh)|tre|ve[nr]|vi([ŧs]|th))\.\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<!-- Ellipsis: ... lowercase -->
+<rule break="no">
+<beforebreak>[^\s](\Q...\E|…)\s</beforebreak>
+<afterbreak>\p{Ll}</afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>['"„]([\.!?…]|\Q...\E)['"”]\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>[\[\(]*(…|\Q...\E)[\]\)]* </beforebreak>
+<afterbreak>\p{Ll}</afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\p{Ps}[!?]+\p{Pe} </beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>[\.!?…]+\p{Pe} </beforebreak>
+<afterbreak>\p{Ll}</afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>["”'’]\s*</beforebreak>
+<afterbreak>\s*\p{Ll}</afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>['"„][\.!?…]['"”]\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b\p{L}\.\s</beforebreak>
+<afterbreak>\p{L}\.\s</afterbreak>
+</rule>
+<rule break="no">
+<beforebreak>\b\p{L}\.</beforebreak>
+<afterbreak>\p{L}\.</afterbreak>
+</rule>
+
+<rule break="yes">
+<beforebreak>([\.!?…]|\Q...\E)[\u00BB\u2019\u201D\u203A"'\p{Pe}\u0002¹²³]*\s</beforebreak>
+<afterbreak></afterbreak>
+</rule>
+<rule break="yes">
+<beforebreak>([\.!?…]|\Q...\E)['"\u00BB\u2019\u201D\u203A\p{Pe}\u0002]*</beforebreak>
+<afterbreak>\p{Lu}[^\p{Lu}]</afterbreak>
+</rule>
+</languagerule>
 <languagerule languagerulename="Tamil">
 <rule break="no">
 <beforebreak>\bஎ\.கா\.\s</beforebreak>
@@ -6107,6 +6201,7 @@
 <languagemap languagepattern="(BR|br).*" languagerulename="Breton"></languagemap>
 <languagemap languagepattern="(PT|pt).*" languagerulename="Portuguese"></languagemap>
 <languagemap languagepattern="(IT|it).*" languagerulename="Italian"></languagemap>
+<languagemap languagepattern="(VEC|vec|vec-IT).*" languagerulename="Venetan"></languagemap>
 <languagemap languagepattern="(TA|ta).*" languagerulename="Tamil"></languagemap>
 <languagemap languagepattern="(FA|fa).*" languagerulename="Persian"></languagemap>
 <languagemap languagepattern="(SR|sr).*" languagerulename="Serbian"></languagemap>

@@ -27,11 +27,58 @@ public class VenetanSRXSentenceTokenizerTest{
 
   private final SRXSentenceTokenizer stokenizer = new SRXSentenceTokenizer(new Venetan());
 
+  //NOTE: sentences here need to end with a space character so they
+  //have correct whitespace when appended:
   @Test
   public void testTokenize() {
-    testSplit("Jèra na ‘àlta, int’ un sèrto paexe, na toxatèƚa de kanpaña, ƚa pi bèƚa toxatèƚa ke se poese mai véder",
-              "Só mama ƚa jèra mata de eƚa, e só nòna ankora de pi.");
-    testSplit("Dot. Karlo Vièna");  // abbreviation
+    testSplit("Sta kuà");
+    testSplit("Sta kuà la xe na fraxe ke la fenise ben. ", "Sta kuà no la xe na fraxe ke la fenise ben");
+
+    testSplit("Sta kuà la xe na fraxe.");
+    testSplit("Sta kuà la xe na fraxe. ", "E anka kuesta.");
+    testSplit("Sta kuà la xe na fraxe.", "Xela vera?", "Sí, la xe.");
+    testSplit("Sta kuà el xe, par ex., el Dot. Karlo Vièna, ke ʼl parla pian...",
+      "Ma sta kuà la xe nʼ altra fraxe.");
+    testSplit("La pòrta núm. 5 la xe saràa.");
+    testSplit("El Señ. Mario el ga da dàr a Pièro 4.50 par kronpar el profumo Chanel No 5.",
+      "No ʼl se gà mai prexentà.");
+    testSplit("A pàx. 6 no ge xe ñente. ", "Nʼ altra fraxe.");
+    testSplit("Ƚàsame in paxe!, el ge gà ŧigà drio. ", "Nʼ altra fraxe.");
+    testSplit("\"Ƚàsame in paxe!\", el ge gà ŧigà drio. ");
+    testSplit("'Ƚàsame in paxe!', el ge gà ŧigà drio. ", "Nʼ altra fraxe.");
+    testSplit("No stà divíder... ", "Bèh, te sà. ", "Èko altre paròle.");
+    testSplit("No stà divíder... bèh, te sà. ", "Èko altre paròle.");
+    testSplit("No stà divíder!... ", "Bèh, te sà. ", "Èko altre paròle.");
+    testSplit("El \".\" no ʼl gà da èser un delimitador.");
+    testSplit("\"ʼArelo kuà!\" la ga dito.");
+    testSplit("\"ʼArelo kuà!\", la ga dito.");
+    testSplit("\"ʼArelo kuà.\" ", "Ma kuesta la xe nʼ altra fraxe.");
+    testSplit("\"ʼArelo kuà!\". ", "Èko kòsa ke la gà dito.");
+    testSplit("La fraxe la fenise kuà. ", "(Nʼ altra fraxe.)");
+    testSplit("La fraxe (...) la fenise kuà.");
+    testSplit("La fraxe [...] la fenise kuà.");
+    testSplit("La fraxe la fenise kuà (...). ", "Nʼ altra fraxe.");
+    testSplit("Na lista: un, do, trè.");
+    testSplit("1) Primo ponto. ", "2) Sekondo ponto. ");
+    testSplit("Stomegar (se varde Vienna, Carlo, 1855, pàx. 123). ");
+    // Missing space after sentence end:
+    testSplit("Joani el vièn da Belun!", "El vive a Trevixo dèso.");
+    // parentheses:
+    testSplit("El fonsiona (par davero!) tuto.");
+    testSplit("El fonsiona [par davero!] tuto.");
+    testSplit("El fonsiona (par davero!). ", "Fídate.");
+    testSplit("El fonsiona [par davero!]. ", "Fida-te.");
+    testSplit("El fonsiona(!) davero ben.");
+    testSplit("El fonsiona[!] davero ben.");
+    testSplit("El fonsiona (!) davero ben, staòlta.");
+    testSplit("El fonsiona [!] davero ben, staòlta.");
+    //deal with at least some nbsp that appear in strange places (e.g. Google Docs, web editors)
+    testSplit("Proa.\u00A0\n", "Nʼ altra proa.");
+    //not clear whether this is the best behavior...
+    testSplit("Proa.\u00A0Nʼ altra proa.");
+
+    //footnotes in LibOO/OOo look like this
+    testSplit("Sta kuà la xe na fraxe.\u0002 ", "E sta kuà la xe nʼ altra.");
   }
 
   private void testSplit(String... sentences) {

@@ -99,7 +99,7 @@ public class WordTokenizer implements Tokenizer {
    * tokenizer to tokenize words.
    * @since 2.5
    */
-  public static String getTokenizingCharacters() {
+  public String getTokenizingCharacters() {
     return TOKENIZING_CHARACTERS;
   }
 
