@@ -41,7 +41,7 @@ import org.languagetool.tokenizers.SRXSentenceTokenizer;
 import org.languagetool.tokenizers.SentenceTokenizer;
 
 import org.languagetool.tagging.disambiguation.Disambiguator;
-import org.languagetool.tagging.vec.VenetanRuleDisambiguator;
+import org.languagetool.tagging.vec.disambiguation.rules.vec.VenetanRuleDisambiguator;
 
 /**
  * @author Mauro Trevisan

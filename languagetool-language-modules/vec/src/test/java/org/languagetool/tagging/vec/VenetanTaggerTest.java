@@ -45,10 +45,10 @@ public class VenetanTaggerTest{
   @Test
   public void testTagger() throws IOException {
     TestTools.myAssert("So' drio 'ndar da mé nòna.",
-      "Soʼ/[sora]AD\r|Soʼ/[sora]PR\r|Soʼ/[èser]VB\r -- drio/[drio]AD\r -- ʼndar/[ʼndar]VB\r -- da/[da]PR\r -- mé/[mé]JPW\r -- nòna/[nòna]N+s+f\r|nòna/[nòna]NO+s+f\r", tokenizer, tagger);
+      "Soʼ/[sora]AD|Soʼ/[sora]PR|Soʼ/[èser]VB -- drio/[drio]AD -- ʼndar/[ʼndar]VB -- da/[da]PR -- mé/[mé]JPW -- nòna/[nòna]NN+s+f|nòna/[nòna]NO+s+f", tokenizer, tagger);
     TestTools.myAssert("Soʼ drio ʼndar da mé nòna.",
-        "Soʼ/[sora]AD\r|Soʼ/[sora]PR\r|Soʼ/[èser]VB\r -- drio/[drio]AD\r -- ʼndar/[ʼndar]VB\r -- da/[da]PR\r -- mé/[mé]JPW\r -- nòna/[nòna]N+s+f\r|nòna/[nòna]NO+s+f\r", tokenizer, tagger);
-    TestTools.myAssert("tuk-tuk", "tuk-tuk/[tuk-tuk]IN\r", tokenizer, tagger);
+        "Soʼ/[sora]AD|Soʼ/[sora]PR|Soʼ/[èser]VB -- drio/[drio]AD -- ʼndar/[ʼndar]VB -- da/[da]PR -- mé/[mé]JPW -- nòna/[nòna]NN+s+f|nòna/[nòna]NO+s+f", tokenizer, tagger);
+    TestTools.myAssert("tuk-tuk", "tuk-tuk/[tuk-tuk]IN", tokenizer, tagger);
     TestTools.myAssert("blablabla", "blablabla/[null]null", tokenizer, tagger);
   }
 
