@@ -50,6 +50,10 @@ public class VenetanTaggerTest{
         "Soʼ/[sora]AD|Soʼ/[sora]PR|Soʼ/[èser]VB -- drio/[drio]AD -- ʼndar/[ʼndar]VB -- da/[da]PR -- mé/[mé]JPW -- nòna/[nòna]NN+s+f|nòna/[nòna]NO+s+f", tokenizer, tagger);
     TestTools.myAssert("tuk-tuk", "tuk-tuk/[tuk-tuk]IN", tokenizer, tagger);
     TestTools.myAssert("blablabla", "blablabla/[null]null", tokenizer, tagger);
+
+//    TestTools.myAssert("Gò visto la granda e bèla Lugrèŧia.",
+//      "Gò/[gaver]VB|Gò/[gò]NN+s+m -- visto/[vistir]VB|visto/[véder]VB+s+m -- la/[la]AD+s+f|la/[la]AP+s+f|la/[la]PKCD+3+s+f|la/[la]PKS+3+s+f -- granda/[granda]JJ+s+f|granda/[granda]NN+s+f -- e/[e]CN -- molto/[molto]AD|molto/[molto]JJ+s+m -- bèla/[bèla]IN+s+f|bèla/[bèla]JJ+s+f -- Lugrèŧia/[Lugrèŧia]NNP+s+f",
+//      tokenizer, tagger);
   }
 
 }
