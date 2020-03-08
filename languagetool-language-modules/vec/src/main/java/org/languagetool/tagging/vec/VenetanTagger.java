@@ -24,15 +24,21 @@ import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
 import org.languagetool.tagging.BaseTagger;
 
+
 public class VenetanTagger extends BaseTagger {
+
+  public VenetanTagger(Language language) {
+    super("/vec/tagger/" + language.getShortCode() + JLanguageTool.DICTIONARY_FILENAME_EXTENSION,  Locale.ROOT, false);
+  }
 
   @Override
   public String getManualAdditionsFileName() {
-    return "/vec/manual-tagger.txt";
+    return "/vec/tagger/manual-tagger.txt";
   }
 
-  public VenetanTagger(Language language) {
-    super("/vec/" + language.getShortCode() + JLanguageTool.DICTIONARY_FILENAME_EXTENSION,  Locale.ROOT, false);
+  @Override
+  public String getManualRemovalsFileName() {
+    return "/vec/tagger/removed-tagger.txt";
   }
 
 }
