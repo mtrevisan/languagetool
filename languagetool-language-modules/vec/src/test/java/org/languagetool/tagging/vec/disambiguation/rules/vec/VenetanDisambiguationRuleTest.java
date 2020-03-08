@@ -55,7 +55,7 @@ public class VenetanDisambiguationRuleTest{
       "/[null]SENT_START Gò/[gaver]VB|Gò/[gò]NN+s+m  /[null]null visto/[vistir]VB|visto/[véder]VB+s+m  /[null]null la/[la]AD+s+f  /[null]null bèla/[bèla]IN+s+f|bèla/[bèla]JJ+s+f  /[null]null Lugrèŧia/[Lugrèŧia]NNP+s+f ./[null]null",
       tokenizer, sentenceTokenizer, tagger, disambiguator);
     TestTools.myAssert("Gò visto la molto bèla Lugrèŧia.",
-      "/[null]SENT_START Gò/[gaver]VB|Gò/[gò]NN+s+m  /[null]null visto/[vistir]VB|visto/[véder]VB+s+m  /[null]null la/[la]AD+s+f  /[null]null molto/[molto]AD|molto/[molto]JJ+s+m  /[null]null bèla/[bèla]IN+s+f|bèla/[bèla]JJ+s+f  /[null]null Lugrèŧia/[Lugrèŧia]NNP+s+f ./[null]null",
+      "/[null]SENT_START Gò/[gaver]VB|Gò/[gò]NN+s+m  /[null]null visto/[vistir]VB|visto/[véder]VB+s+m  /[null]null la/[la]AD+s+f  /[null]null molto/[molto]AD|molto/[molto]JJ+s+m|molto/[molto]QE+s+m  /[null]null bèla/[bèla]IN+s+f|bèla/[bèla]JJ+s+f  /[null]null Lugrèŧia/[Lugrèŧia]NNP+s+f ./[null]null",
       tokenizer, sentenceTokenizer, tagger, disambiguator);
 //    TestTools.myAssert("Gò visto la granda e bèla Lugrèŧia.",
 //      "/[null]SENT_START Gò/[gaver]VB|Gò/[gò]NN+s+m  /[null]null visto/[vistir]VB|visto/[véder]VB+s+m  /[null]null la/[la]AD+s+f  /[null]null granda/[granda]JJ+s+f|granda/[granda]NN+s+f  /[null]null molto/[molto]AD|molto/[molto]JJ+s+m  /[null]null bèla/[bèla]IN+s+f|bèla/[bèla]JJ+s+f  /[null]null Lugrèŧia/[Lugrèŧia]NNP+s+f ./[null]null",
