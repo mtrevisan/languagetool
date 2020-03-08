@@ -72,7 +72,7 @@ public class Venetan extends Language implements AutoCloseable {
   @Override
   public Tagger getTagger() {
     if (tagger == null) {
-      tagger = new VenetanTagger();
+      tagger = new VenetanTagger(this);
     }
     return tagger;
   }

@@ -33,7 +33,7 @@ public class VenetanTaggerTest{
 
   @Before
   public void setUp() {
-    tagger = new VenetanTagger();
+    tagger = new VenetanTagger(new Venetan());
     tokenizer = new VenetanWordTokenizer();
   }
 

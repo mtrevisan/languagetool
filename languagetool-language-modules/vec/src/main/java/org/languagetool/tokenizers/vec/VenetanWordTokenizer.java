@@ -21,9 +21,9 @@ package org.languagetool.tokenizers.vec;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.RegExUtils;
 import org.languagetool.tokenizers.WordTokenizer;
 
 /**
@@ -33,70 +33,31 @@ public class VenetanWordTokenizer extends WordTokenizer {
 
   private static final String UNICODE_APOSTROPHE = "'";
   private static final String UNICODE_MODIFIER_LETTER_APOSTROPHE = "\u02BC";
-  private static final String UNICODE_APOSTROPHES_PATTERN = "[" + UNICODE_APOSTROPHE + UNICODE_MODIFIER_LETTER_APOSTROPHE + "]";
+  private static final String UNICODE_APOSTROPHES = UNICODE_APOSTROPHE + UNICODE_MODIFIER_LETTER_APOSTROPHE;
 
   private final Pattern patternApostrophe;
 
 
   public VenetanWordTokenizer(){
-    final String tokenizingChars = Pattern.quote(getTokenizingCharacters());
+    final String quotedTokenizingChars = Pattern.quote(getTokenizingCharacters());
     patternApostrophe = Pattern.compile("(?i)"
-      + "([dglƚnsv]|(a|[ai\u2019]n)dó|[kps]o|pu?ò|st|tan|kuan|tut|([n\u2019]|in)t|tèr[sŧ]|k[uo]art|kuint|sèst|[kp]a|sen[sŧ]|komò|fra|nu|re|intor)" + UNICODE_APOSTROPHES_PATTERN + "(?=[" + tokenizingChars + "])"
+      + "(a[lƚnv]|di|e[lƚn]|[gks][oó]|[iu]n|[lƚ][aài]|v[aàeèéiíoòóuú])[" + UNICODE_APOSTROPHES + "](?=[" + quotedTokenizingChars + "]|$)"
       + "|"
-      + "(?<=\\s)" + UNICODE_APOSTROPHES_PATTERN + "[^" + tokenizingChars + "]+"
+      + "[" + UNICODE_APOSTROPHES + "](a[nrsŧ]|b[iuú]|e[cdglƚmnrstv-]|i[eégklƚmnoóstv]|[kpsv]a|[lntuéíòóú]|o[klƚmnrsx]|s[eé]|à[nrs]|èc|[ñv][aàeèéiíoòóuú]|[lƚ]o)"
     );
   }
 
   @Override
-  public List<String> tokenize(final String text) {
+  public List<String> tokenize(String text) {
     List<String> list = new ArrayList<>();
+    text = RegExUtils.replaceAll(text, patternApostrophe, "$1" + UNICODE_MODIFIER_LETTER_APOSTROPHE + "$2");
     final StringTokenizer st = new StringTokenizer(text, getTokenizingCharacters(), true);
     while(st.hasMoreElements()){
       final String token = st.nextToken();
       list.add(token);
     }
-    list = joinApostrophes(list);
     list = joinEMails(list);
     list = joinUrls(list);
-    return list;
-  }
-
-  protected List<String> joinApostrophes(final List<String> list){
-    final StringBuilder sb = new StringBuilder();
-    for(final String item : list){
-      sb.append(item);
-    }
-    final String text = sb.toString();
-    if(text.contains(UNICODE_APOSTROPHE) || text.contains(UNICODE_MODIFIER_LETTER_APOSTROPHE)){
-      final List<String> l = new ArrayList<>();
-
-      final Matcher matcher = patternApostrophe.matcher(text);
-      int currentPosition = 0;
-      int idx = 0;
-      while(matcher.find()){
-        final int start = matcher.start();
-        final int end = matcher.end();
-        while(currentPosition < end){
-          if(currentPosition < start){
-            l.add(list.get(idx));
-          }
-          else if(currentPosition == start){
-            //substitute Unicode Apostrophe with Unicode Modifier Letter Apostrophe
-            final String group = matcher.group()
-              .replaceAll(UNICODE_APOSTROPHE, UNICODE_MODIFIER_LETTER_APOSTROPHE);
-            l.add(group);
-          }
-          currentPosition += list.get(idx)
-            .length();
-          idx ++;
-        }
-      }
-      if(currentPosition < text.length()){
-        l.addAll(list.subList(idx, list.size()));
-      }
-
-      return l;
-    }
     return list;
   }
 

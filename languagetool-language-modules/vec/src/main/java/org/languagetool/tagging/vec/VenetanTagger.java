@@ -20,17 +20,19 @@ package org.languagetool.tagging.vec;
 
 import java.util.Locale;
 
+import org.languagetool.JLanguageTool;
+import org.languagetool.Language;
 import org.languagetool.tagging.BaseTagger;
 
 public class VenetanTagger extends BaseTagger {
 
   @Override
   public String getManualAdditionsFileName() {
-    return "/vec/added.txt";
+    return "/vec/manual-tagger.txt";
   }
 
-  public VenetanTagger() {
-    super("/vec/venetan.dict", Locale.ROOT);
+  public VenetanTagger(Language language) {
+    super("/vec/" + language.getShortCode() + JLanguageTool.DICTIONARY_FILENAME_EXTENSION,  Locale.ROOT, false);
   }
 
 }

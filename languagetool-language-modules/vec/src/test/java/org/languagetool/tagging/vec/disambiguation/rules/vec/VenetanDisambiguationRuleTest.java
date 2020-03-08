@@ -40,7 +40,7 @@ public class VenetanDisambiguationRuleTest{
 
   @Before
   public void setUp() {
-    tagger = new VenetanTagger();
+    tagger = new VenetanTagger(new Venetan());
     tokenizer = new WordTokenizer();
     sentenceTokenizer = new SRXSentenceTokenizer(new Venetan());
     disambiguator = new XmlRuleDisambiguator(new Venetan());
