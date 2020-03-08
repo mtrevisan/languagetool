@@ -27,18 +27,22 @@ import org.languagetool.tagging.BaseTagger;
 
 public class VenetanTagger extends BaseTagger {
 
+  private static final String BASE_FOLDER = "/vec/tagger/";
+
+
   public VenetanTagger(Language language) {
-    super("/vec/tagger/" + language.getShortCode() + JLanguageTool.DICTIONARY_FILENAME_EXTENSION,  Locale.ROOT, false);
+    super(BASE_FOLDER + language.getShortCode() + JLanguageTool.DICTIONARY_FILENAME_EXTENSION,  Locale.ROOT,
+      false);
   }
 
   @Override
   public String getManualAdditionsFileName() {
-    return "/vec/tagger/manual-tagger.txt";
+    return BASE_FOLDER + "manual-tagger.txt";
   }
 
   @Override
   public String getManualRemovalsFileName() {
-    return "/vec/tagger/removed-tagger.txt";
+    return BASE_FOLDER + "removed-tagger.txt";
   }
 
 }

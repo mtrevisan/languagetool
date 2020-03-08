@@ -44,20 +44,18 @@ public class VenetanWordRepeatRule extends WordRepeatRule {
     if (wordRepetitionOf("via", tokens, position)) {
       return true;   // "Il lessico si andava via via modificando."
     }
-    if (wordRepetitionOf("così", tokens, position)) {
+    if (wordRepetitionOf("kusí", tokens, position)) {
       return true;   // "Mi è sembrato così così."
     }
     return false;
   }
 
   private boolean wordRepetitionOf(String word, AnalyzedTokenReadings[] tokens, int position) {
-    if (position > 2) {
-      return (tokens[position - 1].getToken().equals(word) && tokens[position].getToken().equals(word));
-    }
-    if (position == 2) {
-      return (tokens[1].getToken().equalsIgnoreCase(word) && tokens[2].getToken().equals(word));
-    }
-    return false;
+    final String firstToken = tokens[position - 1].getToken();
+    final String secondToken = tokens[position].getToken();
+    return (position > 1?
+      firstToken.equals(word) && secondToken.equals(word):
+      firstToken.equalsIgnoreCase(word) && secondToken.equals(word));
   }
 
 }
