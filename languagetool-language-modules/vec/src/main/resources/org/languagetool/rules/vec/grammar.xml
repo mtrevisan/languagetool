@@ -3,7 +3,7 @@
 <?xml-stylesheet type="text/css" href="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.css" title="Easy editing stylesheet" ?>
 <!--
 Venetan Grammar and Typo Rules for LanguageTool
-Copyright (C) 2006 Marcin Miłkowski
+Copyright (C) 2020 Mauro Trevisan
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -88,34 +88,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  ================================================================================
 -->
 
-<!--
- ================================================================================
- Fixes
- ======== ===================================================================================
- PB001    Removed prepositions and two letter words in repetition check
- PB002    Added some preposition usage checks (moved a gratis rule)
- 2957133  name/article konkòrdance (un vs uno)
- PB004    Added rule for attimino and momentino in stile-parlato
- PB005    Fixed rule for dà to exclude "se da" pattern voted as useless
- PB006    Fixed rule for false positives in past tense konkòrdance GR_10_001
- PB007    Added check for person in tense konkòrdance GR_10_* overrides PB006
- PB008    Added rules to check the use of "congiuntivo"
- PB009    Created uxo korèto under verbs and added adire vie legali
- PB010    Reworked repetition rule ST_03_002
- PB011    Reworked rule GR_04_002 exteneded to all words ending with à|è|é|ì|ò|ù
- PB012    Added exception for article of the word "dei"
- 3609558  False positive in rule ER_02_002 'al'-'la'
- 3610220  False positive in 'per lo meno' for rule GR_02_001 changed so that adv are skipped
- 3610360  False positive in dates for rule ST_04_001 fixes also 3611066
- 3610289  False positive il artice for word "Signore"
- 182      False positive in 'ai peccati' suggests 'hai'
- 181      Don't apply word repetition rule on 'via via' and 'così così'
- 180      Fix some false positives in al for la
- PB013    Added ma però rule
- PB014    We don't need the skip in article rules since we are unifying adj and noun
- ======== ==================================================================================
--->
-<!--suppress CheckTagEmptyBody -->
+<!-- suppress CheckTagEmptyBody -->
 
 <!DOCTYPE rules [
 		<!ENTITY apostrophe "['ʼ]">
@@ -162,11 +135,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 		'>
 	]>
 
-<rules lang="vec" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd">
+<rules lang="vec" xsi:noNamespaceSchemaLocation="../../../../../../../../../languagetool-core/src/main/resources/org/languagetool/rules/rules.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- GRAMÀDEGA ARTÍKOLI - GR_02 -->
-    <category id="CAT2" name="Gramàdega - Artíkoli">
-        <rulegroup name="uxo korèto" id="GR_02_001">
+    <category id="CAT1" name="Gramàdega - Artíkoli">
+        <rulegroup id="C1_GR1_001" name="sekuentha korèta">
 				<!-- pronòmi -->
 				<!-- órdene de i pron.: inparsonal/reflesivo > logativo/dativo > akuxativo > dhenitivo (PM/PKR > PLE/PLR/PKCI > PKCD > PKCI+1+p > ) -->
 				<rule>
@@ -197,7 +170,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 				<!-- [eaʼ]l/[lƚ]o ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
 <!--				<rule>-->
 <!--					<pattern>-->
-<!--						&lt;!&ndash; PB014 marker><token skip="1" regexp="yes">[lƚ][ae]|lʼ|i</token></marker &ndash;&gt;-->
 <!--						<marker><token regexp="yes">[lƚ][ae]|lʼ|i</token></marker>-->
 <!--						<token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">-->
 <!--							[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*-->
@@ -211,7 +183,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <!-- [lƚ]a/lʼ ([ea]l|[lƚ]o|ʼl|[lƚ]a|lʼ|i|[lƚ]e) -->
 <!--            <rule>-->
 <!--                <pattern>-->
-                    <!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oe]|i</token></marker -->
 <!--                    <marker><token regexp="yes">[eaʼ]l|[lƚ][oe]|i</token></marker>-->
 <!--							<token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes">-->
 <!--								<exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/>-->
@@ -224,14 +195,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 				<!-- i ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
 <!--				<rule>-->
 <!--					<pattern>-->
-						<!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oae]|lʼ</token></marker -->
 <!--						<marker><token regexp="yes">[eaʼ]l|[lƚ][oae]|lʼ</token></marker>-->
 <!--						<token postag="(NOUN-M.p)|(ADJ.*\+m\+p)" postag_regexp="yes" regexp="yes">-->
 <!--							[bcdfghlmnpqrstv][aeiou].*|[bcdfglmnqrtv][bcdfglmnpqrtv].*-->
 <!--							<exception postag="(NOUN-M.s)|(ADJ.*\+m\+s)|(NOUN-F.p)|(ADJ.*\+f\+p)|(ADV)" postag_regexp="yes"/>-->
-							<!-- PB0012 + -->
 <!--							<exception>dei</exception>-->
-							<!-- PB0012 - -->
 <!--						</token>-->
 <!--					</pattern>-->
 <!--					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>la/ƚa</suggestion>.</message>-->
@@ -241,13 +209,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 				<!-- [lƚ]e ([eaʼ]l|[lƚ]o|[lƚ]a|lʼ|i|[lƚ]e) -->
 <!--				<rule>-->
 <!--					<pattern>-->
-						<!-- PB014 marker><token skip="1" regexp="yes">[eaʼ]l|[lƚ][oa]|lʼ|i</token></marker -->
 <!--						<marker><token regexp="yes">[eaʼ]l|[lƚ][oa]|lʼ|i</token></marker>-->
 <!--						<token postag="(NOUN-F.p)|(ADJ.*\+f\+p)" postag_regexp="yes">-->
 <!--							<exception postag="(NOUN-[MF].s)|(ADJ.*\+f\+s)|(NOUN-M.p)|(ADJ.*\+m\+p)(ADV)" postag_regexp="yes"/>-->
-							<!-- 3610289 + -->
 <!--							<exception regexp="yes">(?-i)Siñore</exception>-->
-							<!-- 3610289 - -->
 <!--						</token>-->
 <!--					</pattern>-->
 <!--					<message>ʼL artíkol no ʼl konkòrda, doparar: <suggestion>le/ƚe</suggestion>.</message>-->
@@ -258,7 +223,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 				<!-- un|an|on (un|an|on|na|nʼ) -->
 <!--				<rule>-->
 <!--					<pattern>-->
-					<!-- PB014 marker><token skip="1" regexp="yes">na|nʼ</token></marker -->
 <!--					<marker><token regexp="yes">na|nʼ</token></marker>-->
 <!--					<token postag="(NOUN-M.s)|(ADJ.*\+m\+s)" postag_regexp="yes" regexp="yes">-->
 <!--						[bcdfghlmnpqrstv][aeiou].*|[bcdfghlmnqrtv][bcdfghlmnpqrtv].*-->
@@ -271,7 +235,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <!-- na/nʼ (un|an|on|na|nʼ) -->
 <!--            <rule>-->
 <!--                <pattern>-->
-                    <!-- PB014 marker><token skip="1" regexp="yes">un|an|on</token></marker -->
 <!--                    <marker><token regexp="yes">un|an|on</token></marker>-->
 <!--                    <token postag="(NOUN-F.s)|(ADJ.*\+f\+s)" postag_regexp="yes">-->
 <!--								<exception postag="(NOUN-F.p)|(ADJ.*\+f\+p)|(NOUN-M.s)|(ADJ.*\+m\+s)|(ADV)" postag_regexp="yes"/>-->

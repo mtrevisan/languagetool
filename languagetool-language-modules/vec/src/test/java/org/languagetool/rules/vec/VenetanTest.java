@@ -33,7 +33,7 @@ public class VenetanTest extends LanguageSpecificTest {
     String s = "Inserite qui il vostro testo... oppure controlate direttamente questo ed avrete un assaggio di quali errori possono essere identificati con LanguageTool.";
     Venetan lang = new Venetan();
     testDemoText(lang, s,
-      Arrays.asList("GR_05_002", "VEC_MORFOLOGIK_RULE", "ST_03_001")
+      Arrays.asList("C1_GR1_001", "VEC_MORFOLOGIK_RULE")
     );
 //    runTests(lang);
   }
