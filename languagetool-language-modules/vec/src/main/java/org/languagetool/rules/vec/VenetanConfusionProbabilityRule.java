@@ -32,6 +32,7 @@ public class VenetanConfusionProbabilityRule extends ConfusionProbabilityRule {
 
   public VenetanConfusionProbabilityRule(ResourceBundle messages, LanguageModel languageModel, Language language) {
     super(messages, languageModel, language);
+
     // TODO: add example:
     //addExamplePair(Example.wrong("<marker>wrong</marker> word in sentence"),
     //               Example.fixed("<marker>correct</marker> word in sentence"));

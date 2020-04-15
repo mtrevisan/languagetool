@@ -32,8 +32,9 @@ public final class MorfologikVenetanSpellerRule extends MorfologikSpellerRule {
 
   private static final String RESOURCE_FILENAME = "/vec/hunspell/vec.dict";
 
-  public MorfologikVenetanSpellerRule(ResourceBundle messages,
-                                      Language language, UserConfig userConfig, List<Language> altLanguages) throws IOException {
+
+  public MorfologikVenetanSpellerRule(ResourceBundle messages, Language language, UserConfig userConfig,
+      List<Language> altLanguages) throws IOException {
     super(messages, language, userConfig, altLanguages);
   }
 
@@ -44,7 +45,7 @@ public final class MorfologikVenetanSpellerRule extends MorfologikSpellerRule {
 
   @Override
   public String getId() {
-    return "MORFOLOGIK_RULE_VEC";
+    return "VEC_MORFOLOGIK_RULE";
   }
 
 }

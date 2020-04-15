@@ -30,6 +30,7 @@ import org.languagetool.UserConfig;
 import org.languagetool.languagemodel.LanguageModel;
 import org.languagetool.rules.*;
 import org.languagetool.rules.vec.VenetanConfusionProbabilityRule;
+import org.languagetool.rules.vec.VenetanUnpairedBracketsRule;
 import org.languagetool.rules.vec.VenetanWordRepeatRule;
 import org.languagetool.rules.vec.MorfologikVenetanSpellerRule;
 import org.languagetool.tokenizers.WordTokenizer;
@@ -96,15 +97,23 @@ public class Venetan extends Language implements AutoCloseable {
                                      List<Language> altLanguages) throws IOException {
     return Arrays.asList(
             new WhitespaceBeforePunctuationRule(messages),
-            new CommaWhitespaceRule(messages),
+            new CommaWhitespaceRule(messages,
+                  Example.wrong("Gavemo kronpà vin<marker> ,</marker> formài, e pan."),
+                  Example.fixed("Gavemo kronpà vin<marker>,</marker> formài, e pan.")),
             new DoublePunctuationRule(messages),
-            new UppercaseSentenceStartRule(messages, this),
+            new UppercaseSentenceStartRule(messages, this,
+                  Example.wrong("Sta kaxa la xe vèca. <marker>la</marker> xe stàa kostruía inté ʼl 1850."),
+                  Example.fixed("Sta kaxa la xe vèca. <marker>La</marker> xe stàa kostruía inté ʼl 1850.")),
             new MultipleWhitespaceRule(messages, this),
             new SentenceWhitespaceRule(messages),
+            new WhiteSpaceBeforeParagraphEnd(messages, this),
+            new WhiteSpaceAtBeginOfParagraph(messages),
+            new EmptyLineRule(messages, this),
             new GenericUnpairedBracketsRule(messages,
-                    Arrays.asList("[", "(", "{", "»", "«" /*"‘"*/),
-                    Arrays.asList("]", ")", "}", "«", "»" /*"’"*/)),
+                  Arrays.asList("[", "(", "{", "»", "«" /*"‘"*/),
+                  Arrays.asList("]", ")", "}", "«", "»" /*"’"*/)),
             new MorfologikVenetanSpellerRule(messages, this, userConfig, altLanguages),
+            new VenetanUnpairedBracketsRule(messages, this),
             new VenetanWordRepeatRule(messages, this)
     );
   }

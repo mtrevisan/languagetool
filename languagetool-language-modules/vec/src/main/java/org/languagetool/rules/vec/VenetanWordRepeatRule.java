@@ -36,7 +36,7 @@ public class VenetanWordRepeatRule extends WordRepeatRule {
 
   @Override
   public String getId() {
-    return "VENETAN_WORD_REPEAT_RULE";
+    return "VEC_WORD_REPEAT_RULE";
   }
 
   @Override
